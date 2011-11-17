@@ -9,4 +9,11 @@
   <artifactId>frontend</artifactId>
   <packaging>war</packaging>
   <name>Frontend</name>
+  <dependencies>
+  	<dependency>
+  		<groupId>net.sam_solutions.courses</groupId>
+  		<artifactId>backend</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

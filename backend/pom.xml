@@ -6,7 +6,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
+  <groupId>net.sam_solutions.courses</groupId>
   <artifactId>backend</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <name>Backend</name>
   <dependencies>
   	<dependency>
