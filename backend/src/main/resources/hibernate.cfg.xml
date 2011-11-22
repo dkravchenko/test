@@ -5,6 +5,12 @@
 
 <hibernate-configuration>
 	<session-factory>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="connection.url">jdbc:mysql://localhost:3306/test</property>   
+    	<property name="connection.username">root</property>
+    	<property name="connection.password"></property>
+    	<property name="connection.pool_size">15</property>
+   		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.User" />
 		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.Meeting" />
 		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.Task" />

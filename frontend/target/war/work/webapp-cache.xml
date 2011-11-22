@@ -24,6 +24,7 @@
           <string>WEB-INF/lib/asm-1.5.3.jar</string>
           <string>WEB-INF/lib/hibernate-commons-annotations-3.3.0.ga.jar</string>
           <string>WEB-INF/lib/ejb3-persistence-1.0.1.GA.jar</string>
+          <string>WEB-INF/lib/framework-0.0.1-SNAPSHOT.jar</string>
         </pathsSet>
       </path-set>
     </entry>
@@ -40,6 +41,18 @@
         <optional>false</optional>
       </dependency>
       <targetFileName>backend-0.0.1-SNAPSHOT.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>net.sam_solutions.courses</groupId>
+        <artifactId>framework</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <type>jar</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>framework-0.0.1-SNAPSHOT.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
   </dependenciesInfo>
 </webapp-structure>
