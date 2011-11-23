@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.FetchType;
 
 @Entity
 @Table(name="users")
@@ -24,6 +26,27 @@ public class User {
 	private String role;
 	private Set<Meeting> meetings = new HashSet<Meeting>(0);
 	private Set<Task> tasks = new HashSet<Task>(0);
+	
+	public User(){
+		
+	}
+	
+	public User(Integer id, String login, String pass, String firstName, String lastName, String role){
+		this.id = id;
+		this.login = login;
+		this.pass = pass;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.role = role;
+	}
+	
+	public void setMeeting(Meeting meeting) {
+		this.meetings.add(meeting);
+	}
+	
+	public void setTask(Task task) {
+		this.tasks.add(task);
+	}
 	
 	@Id
 	@GeneratedValue
@@ -84,6 +107,7 @@ public class User {
 		this.meetings = meetings;
 	}
 	
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "tasks_has_users", joinColumns = { @JoinColumn(name = "users_id_user") }, inverseJoinColumns = { @JoinColumn(name = "tasks_id_task") })
 	public Set<Task> getTasks() {
@@ -91,5 +115,60 @@ public class User {
 	}
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((pass == null) ? 0 : pass.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		if (pass == null) {
+			if (other.pass != null)
+				return false;
+		} else if (!pass.equals(other.pass))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
+		return true;
 	}
 }

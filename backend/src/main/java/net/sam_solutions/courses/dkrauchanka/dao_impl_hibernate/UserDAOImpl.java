@@ -4,33 +4,54 @@ import java.util.List;
 
 import net.sam_solutions.courses.dkrauchanka.dao.UserDAO;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
+import net.sam_solutions.courses.dkrauchanka.utils.HibernateUtil;
 
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-@Repository
 public class UserDAOImpl implements UserDAO{
-	@Autowired
+
 	private SessionFactory sessionFactory;
 	
+	public UserDAOImpl(){
+		sessionFactory = HibernateUtil.getSessionFactory();
+	}
+	
 	public void addUser(User user) {
-		sessionFactory.getCurrentSession().save(user);
+		Session session = sessionFactory.openSession();
+		session.save(user);
+		session.close();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<User> listUser() {
-
-		return sessionFactory.getCurrentSession().createQuery("from User")
-			.list();
+		Session session = sessionFactory.openSession();
+		List<User> list = session.createQuery("from User").list();
+		session.close();
+		return list;
+	}
+	
+	public User getUser(Integer id){
+		Session session = sessionFactory.openSession();
+		User user = (User)session.get(User.class,new Integer(id));
+		session.close();
+		return user;
 	}
 
-	public void removeUser(Integer id) {
-		User user = (User) sessionFactory.getCurrentSession().load(
-				User.class, id);
-		if (null != user) {
-			sessionFactory.getCurrentSession().delete(user);
-		}
-
+	public void removeUser(User user) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.delete(user);
+		transaction.commit();
+		session.close();
+	}
+	
+	public void updateUser(User user){
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(user);
+		transaction.commit();
+		session.close();
 	}
 }

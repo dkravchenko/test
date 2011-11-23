@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.094" errors="1" skipped="0" tests="1" name="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest">
+<testsuite failures="0" time="6.748" errors="0" skipped="0" tests="3" name="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_26\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="F:\courses\backend"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_26\jre\lib\endorsed"/>
     <property name="os.arch" value="x86"/>
-    <property name="surefire.real.class.path" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter7801470769128655936.jar"/>
+    <property name="surefire.real.class.path" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter2474609808612309993.jar"/>
     <property name="java.io.tmpdir" value="C:\DOCUME~1\kda\LOCALS~1\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -28,22 +28,22 @@
     <property name="os.name" value="Windows XP"/>
     <property name="sun.jnu.encoding" value="Cp1251"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.6.0_26\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\system32\WindowsPowerShell\v1.0;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\;C:\maven\apache-maven-2.2.1\bin;C:\Program Files\Java\jdk1.6.0_26\bin; C:\Program Files\Git\bin;."/>
-    <property name="surefire.test.class.path" value="F:\courses\backend\target\test-classes;F:\courses\backend\target\classes;C:\Documents and Settings\kda\.m2\repository\javax\persistence\persistence-api\1.0\persistence-api-1.0.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-core\3.5.0-Final\hibernate-core-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\antlr\antlr\2.7.6\antlr-2.7.6.jar;C:\Documents and Settings\kda\.m2\repository\commons-collections\commons-collections\3.1\commons-collections-3.1.jar;C:\Documents and Settings\kda\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Documents and Settings\kda\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Documents and Settings\kda\.m2\repository\javax\transaction\jta\1.1\jta-1.1.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\slf4j-api\1.5.8\slf4j-api-1.5.8.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-annotations\3.5.0-Final\hibernate-annotations-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-commons-annotations\3.2.0.Final\hibernate-commons-annotations-3.2.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.0.Final\hibernate-jpa-2.0-api-1.0.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-entitymanager\3.5.0-Final\hibernate-entitymanager-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar;C:\Documents and Settings\kda\.m2\repository\asm\asm\3.1\asm-3.1.jar;C:\Documents and Settings\kda\.m2\repository\javassist\javassist\3.9.0.GA\javassist-3.9.0.GA.jar;C:\Documents and Settings\kda\.m2\repository\junit\junit\4.7\junit-4.7.jar;C:\Documents and Settings\kda\.m2\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar;"/>
+    <property name="surefire.test.class.path" value="F:\courses\backend\target\test-classes;F:\courses\backend\target\classes;C:\Documents and Settings\kda\.m2\repository\javax\persistence\persistence-api\1.0\persistence-api-1.0.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-core\3.5.0-Final\hibernate-core-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\antlr\antlr\2.7.6\antlr-2.7.6.jar;C:\Documents and Settings\kda\.m2\repository\commons-collections\commons-collections\3.1\commons-collections-3.1.jar;C:\Documents and Settings\kda\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Documents and Settings\kda\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Documents and Settings\kda\.m2\repository\javax\transaction\jta\1.1\jta-1.1.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\slf4j-api\1.5.10\slf4j-api-1.5.10.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-annotations\3.5.0-Final\hibernate-annotations-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-commons-annotations\3.2.0.Final\hibernate-commons-annotations-3.2.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.0.Final\hibernate-jpa-2.0-api-1.0.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-entitymanager\3.5.0-Final\hibernate-entitymanager-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar;C:\Documents and Settings\kda\.m2\repository\asm\asm\3.1\asm-3.1.jar;C:\Documents and Settings\kda\.m2\repository\javassist\javassist\3.9.0.GA\javassist-3.9.0.GA.jar;C:\Documents and Settings\kda\.m2\repository\junit\junit\4.7\junit-4.7.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\jcl-over-slf4j\1.5.10\jcl-over-slf4j-1.5.10.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\slf4j-log4j12\1.5.10\slf4j-log4j12-1.5.10.jar;C:\Documents and Settings\kda\.m2\repository\log4j\log4j\1.2.15\log4j-1.2.15.jar;C:\Documents and Settings\kda\.m2\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="50.0"/>
     <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
     <property name="os.version" value="5.1"/>
     <property name="user.home" value="C:\Documents and Settings\kda"/>
-    <property name="user.timezone" value=""/>
+    <property name="user.timezone" value="America/Caracas"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.6"/>
     <property name="file.encoding" value="Cp1251"/>
     <property name="user.name" value="kda"/>
-    <property name="java.class.path" value="F:\courses\backend\target\test-classes;F:\courses\backend\target\classes;C:\Documents and Settings\kda\.m2\repository\javax\persistence\persistence-api\1.0\persistence-api-1.0.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-core\3.5.0-Final\hibernate-core-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\antlr\antlr\2.7.6\antlr-2.7.6.jar;C:\Documents and Settings\kda\.m2\repository\commons-collections\commons-collections\3.1\commons-collections-3.1.jar;C:\Documents and Settings\kda\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Documents and Settings\kda\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Documents and Settings\kda\.m2\repository\javax\transaction\jta\1.1\jta-1.1.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\slf4j-api\1.5.8\slf4j-api-1.5.8.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-annotations\3.5.0-Final\hibernate-annotations-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-commons-annotations\3.2.0.Final\hibernate-commons-annotations-3.2.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.0.Final\hibernate-jpa-2.0-api-1.0.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-entitymanager\3.5.0-Final\hibernate-entitymanager-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar;C:\Documents and Settings\kda\.m2\repository\asm\asm\3.1\asm-3.1.jar;C:\Documents and Settings\kda\.m2\repository\javassist\javassist\3.9.0.GA\javassist-3.9.0.GA.jar;C:\Documents and Settings\kda\.m2\repository\junit\junit\4.7\junit-4.7.jar;C:\Documents and Settings\kda\.m2\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar;"/>
+    <property name="java.class.path" value="F:\courses\backend\target\test-classes;F:\courses\backend\target\classes;C:\Documents and Settings\kda\.m2\repository\javax\persistence\persistence-api\1.0\persistence-api-1.0.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-core\3.5.0-Final\hibernate-core-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\antlr\antlr\2.7.6\antlr-2.7.6.jar;C:\Documents and Settings\kda\.m2\repository\commons-collections\commons-collections\3.1\commons-collections-3.1.jar;C:\Documents and Settings\kda\.m2\repository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;C:\Documents and Settings\kda\.m2\repository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;C:\Documents and Settings\kda\.m2\repository\javax\transaction\jta\1.1\jta-1.1.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\slf4j-api\1.5.10\slf4j-api-1.5.10.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-annotations\3.5.0-Final\hibernate-annotations-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-commons-annotations\3.2.0.Final\hibernate-commons-annotations-3.2.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\javax\persistence\hibernate-jpa-2.0-api\1.0.0.Final\hibernate-jpa-2.0-api-1.0.0.Final.jar;C:\Documents and Settings\kda\.m2\repository\org\hibernate\hibernate-entitymanager\3.5.0-Final\hibernate-entitymanager-3.5.0-Final.jar;C:\Documents and Settings\kda\.m2\repository\cglib\cglib\2.2\cglib-2.2.jar;C:\Documents and Settings\kda\.m2\repository\asm\asm\3.1\asm-3.1.jar;C:\Documents and Settings\kda\.m2\repository\javassist\javassist\3.9.0.GA\javassist-3.9.0.GA.jar;C:\Documents and Settings\kda\.m2\repository\junit\junit\4.7\junit-4.7.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\jcl-over-slf4j\1.5.10\jcl-over-slf4j-1.5.10.jar;C:\Documents and Settings\kda\.m2\repository\org\slf4j\slf4j-log4j12\1.5.10\slf4j-log4j12-1.5.10.jar;C:\Documents and Settings\kda\.m2\repository\log4j\log4j\1.2.15\log4j-1.2.15.jar;C:\Documents and Settings\kda\.m2\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar;"/>
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_26\jre"/>
-    <property name="sun.java.command" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter7801470769128655936.jar C:\DOCUME~1\kda\LOCALS~1\Temp\surefire2738876438041806912tmp C:\DOCUME~1\kda\LOCALS~1\Temp\surefire327912586170656285tmp"/>
+    <property name="sun.java.command" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter2474609808612309993.jar C:\DOCUME~1\kda\LOCALS~1\Temp\surefire5190384256750809870tmp C:\DOCUME~1\kda\LOCALS~1\Temp\surefire3922769005338563687tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="ru"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -60,33 +60,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.047" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest" name="testListUserNull">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImpl.listUser(UserDAOImpl.java:24)
-	at net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest.testListUserNull(UserDAOImplTest.java:15)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at junit.framework.TestCase.runTest(TestCase.java:168)
-	at junit.framework.TestCase.runBare(TestCase.java:134)
-	at junit.framework.TestResult$1.protect(TestResult.java:110)
-	at junit.framework.TestResult.runProtected(TestResult.java:128)
-	at junit.framework.TestResult.run(TestResult.java:113)
-	at junit.framework.TestCase.run(TestCase.java:124)
-	at junit.framework.TestSuite.runTest(TestSuite.java:232)
-	at junit.framework.TestSuite.run(TestSuite.java:227)
-	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:62)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:140)
-	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:127)
-	at org.apache.maven.surefire.Surefire.run(Surefire.java:177)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:345)
-	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1009)
-</error>
-  </testcase>
+  <testcase time="6.593" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest" name="testAddingUser"/>
+  <testcase time="0.031" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest" name="testRemovingUser"/>
+  <testcase time="0.078" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest" name="testUpdatingUser"/>
 </testsuite>

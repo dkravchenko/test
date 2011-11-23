@@ -4,30 +4,54 @@ import java.util.List;
 
 import net.sam_solutions.courses.dkrauchanka.dao.TaskDAO;
 import net.sam_solutions.courses.dkrauchanka.domain.Task;
+import net.sam_solutions.courses.dkrauchanka.utils.HibernateUtil;
 
 import org.hibernate.SessionFactory;
-
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class TaskDAOImpl implements TaskDAO{
 	
 	private SessionFactory sessionFactory;
 	
+	public TaskDAOImpl(){
+		sessionFactory = HibernateUtil.getSessionFactory();
+	}
+	
 	public void addTask(Task task) {
-		sessionFactory.getCurrentSession().save(task);
+		Session session = sessionFactory.openSession();
+		session.save(task);
+		session.close();
 	}
 
 	public List<Task> listTask() {
-
-		return sessionFactory.getCurrentSession().createQuery("from Task")
-			.list();
+		Session session = sessionFactory.openSession();
+		List<Task> list = session.createQuery("from Task").list();
+		session.close();
+		return list;
+	}
+	
+	public Task getTask(Integer id){
+		Session session = sessionFactory.openSession();
+		Task task = (Task)session.get(Task.class,new Integer(id));
+		session.close();
+		return task;
 	}
 
-	public void removeTask(Integer id) {
-		Task task = (Task) sessionFactory.getCurrentSession().load(
-				Task.class, id);
-		if (null != task) {
-			sessionFactory.getCurrentSession().delete(task);
-		}
-
+	public void removeTask(Task task) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.delete(task);
+		transaction.commit();
+		session.close();
+	}
+	
+	public void updateTask(Task task){
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(task);
+		transaction.commit();
+		session.close();
 	}
 }

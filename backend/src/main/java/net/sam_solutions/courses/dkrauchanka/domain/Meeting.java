@@ -1,12 +1,18 @@
 package net.sam_solutions.courses.dkrauchanka.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +25,19 @@ public class Meeting {
 	private String description;
 	private Date date;
 	private User user;
+	
+	public Meeting(){
+		
+	}
+	
+	public Meeting(Integer id, String title, String description, Date date, User user){
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.date = date;
+		this.user = user;
+	}
+	
 	
 	@Id
 	@GeneratedValue
@@ -55,12 +74,61 @@ public class Meeting {
 		this.date = date;
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	public User getUser() {
-		return user;
+	
+	@JoinColumn(name = "id_user_iniciator", referencedColumnName = "id_user")
+	@ManyToOne
+	public User getUser(){
+		return this.user;
 	}
-	public void setUser(User user) {
+	
+	public void setUser(User user){
 		this.user = user;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Meeting other = (Meeting) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+
+	
 		
 }

@@ -7,5 +7,7 @@ import net.sam_solutions.courses.dkrauchanka.domain.Meeting;
 public interface MeetingDAO {
 	public void addMeeting(Meeting meeting);
 	public List<Meeting> listMeeting();
-	public void removeMeeting(Integer id);
+	public void removeMeeting(Meeting meeting);
+	public Meeting getMeeting(Integer id);
+	public void updateMeeting(Meeting meeting);
 }
