@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.857" errors="0" skipped="0" tests="3" name="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest">
+<testsuite failures="0" time="0.294" errors="0" skipped="0" tests="3" name="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_26\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="F:\courses\backend"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_26\jre\lib\endorsed"/>
     <property name="os.arch" value="x86"/>
-    <property name="surefire.real.class.path" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter2474609808612309993.jar"/>
+    <property name="surefire.real.class.path" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter5180510082233447111.jar"/>
     <property name="java.io.tmpdir" value="C:\DOCUME~1\kda\LOCALS~1\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_26\jre"/>
-    <property name="sun.java.command" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter2474609808612309993.jar C:\DOCUME~1\kda\LOCALS~1\Temp\surefire5190384256750809870tmp C:\DOCUME~1\kda\LOCALS~1\Temp\surefire3922769005338563687tmp"/>
+    <property name="sun.java.command" value="C:\DOCUME~1\kda\LOCALS~1\Temp\surefirebooter5180510082233447111.jar C:\DOCUME~1\kda\LOCALS~1\Temp\surefire5209857206971491805tmp C:\DOCUME~1\kda\LOCALS~1\Temp\surefire4284863043711830388tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="ru"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -60,7 +60,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.748" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest" name="testAddingMeeting"/>
+  <testcase time="0.077" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest" name="testAddingMeeting"/>
   <testcase time="0.047" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest" name="testRemovingMeeting"/>
-  <testcase time="0.062" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest" name="testUpdatingMeeting"/>
+  <testcase time="0.17" classname="net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.MeetingDAOImplTest" name="testUpdatingMeeting"/>
 </testsuite>

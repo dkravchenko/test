@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImplTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.764 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.512 sec

@@ -25,6 +25,7 @@ public class Meeting {
 	private String description;
 	private Date date;
 	private User user;
+	private Set<User> users = new HashSet<User>(0);
 	
 	public Meeting(){
 		
@@ -83,6 +84,19 @@ public class Meeting {
 	
 	public void setUser(User user){
 		this.user = user;
+	}
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "users_has_meetings", joinColumns = { @JoinColumn(name = "meetings_id_meeting") }, inverseJoinColumns = { @JoinColumn(name = "users_id_user") })
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+	
+	public void addUser(User user){
+		this.users.add(user);
 	}
 
 	@Override

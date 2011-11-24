@@ -5,12 +5,15 @@
       <path-set>
         <pathsSet class="linked-hash-set">
           <string>index.jsp</string>
+          <string>login.jsp</string>
           <string>WEB-INF/404.jsp</string>
           <string>WEB-INF/hello.jsp</string>
           <string>WEB-INF/web.xml</string>
           <string>WEB-INF/classes/404.jsp</string>
           <string>WEB-INF/classes/controller.xml</string>
           <string>WEB-INF/classes/net/sam_solutions/courses/dkrauchanka/controller/HelloController.class</string>
+          <string>WEB-INF/classes/text.properties</string>
+          <string>WEB-INF/classes/text_ru.properties</string>
           <string>WEB-INF/lib/backend-0.0.1-SNAPSHOT.jar</string>
           <string>WEB-INF/lib/persistence-api-1.0.jar</string>
           <string>WEB-INF/lib/hibernate-core-3.5.0-Final.jar</string>

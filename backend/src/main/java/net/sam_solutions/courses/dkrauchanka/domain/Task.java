@@ -21,6 +21,7 @@ public class Task {
 	private String title;
 	private String text;
 	private String path;
+	private Set<User> users = new HashSet<User>(0);
 	
 	public Task(){
 		
@@ -68,6 +69,18 @@ public class Task {
 		this.path = path;
 	}
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "tasks_has_users", joinColumns = { @JoinColumn(name = "tasks_id_task") }, inverseJoinColumns = { @JoinColumn(name = "users_id_user") })
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+	
+	public void addUser(User user){
+		this.users.add(user);
+	}
 
 	@Override
 	public int hashCode() {
