@@ -1,16 +1,18 @@
 package net.sam_solutions.courses.dkrauchanka.framework;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
 
 public class ControllerManager {
 	private static ControllerManager instance;
@@ -26,25 +28,25 @@ public class ControllerManager {
 		  }
 	}
 	
-	private void init() throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
+	private void init(String path) throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
 		this.map = new HashMap<String,String>();
     	SAXParserFactory factory = SAXParserFactory.newInstance();
     	SAXParser parser = factory.newSAXParser();
     	SAXHandler handler = new SAXHandler();
-    	parser.parse(new File("controllers.xml"), handler);
+    	parser.parse(new File(path), handler);
 	}
 	
-    private ControllerManager() throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
-    	this.init();
+    private ControllerManager(String path) throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
+    	this.init(path);
     }
     
     public String getController(String name){
     	return map.get(name);
     }
 
-    public static synchronized ControllerManager getInstance() throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
+    public static synchronized ControllerManager getInstance(String path) throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
             if (null == instance) {
-                    instance = new ControllerManager();
+                    instance = new ControllerManager(path);
             }
             return instance;
     }
