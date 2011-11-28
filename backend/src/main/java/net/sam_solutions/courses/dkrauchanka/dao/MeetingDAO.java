@@ -9,5 +9,4 @@ public interface MeetingDAO {
 	public List<Meeting> listMeeting();
 	public void removeMeeting(Meeting meeting);
 	public Meeting getMeeting(Integer id);
-	public void updateMeeting(Meeting meeting);
 }

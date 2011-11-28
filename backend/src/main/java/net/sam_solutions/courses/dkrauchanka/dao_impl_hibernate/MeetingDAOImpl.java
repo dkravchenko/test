@@ -21,7 +21,7 @@ public class MeetingDAOImpl implements MeetingDAO{
 	
 	public void addMeeting(Meeting meeting) {
 		Session session = sessionFactory.openSession();
-		session.save(meeting);
+		session.saveOrUpdate(meeting);
 		session.close();
 	}
 
@@ -43,14 +43,6 @@ public class MeetingDAOImpl implements MeetingDAO{
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(meeting);
-		transaction.commit();
-		session.close();
-	}
-	
-	public void updateMeeting(Meeting meeting){
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(meeting);
 		transaction.commit();
 		session.close();
 	}

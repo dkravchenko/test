@@ -1,17 +1,15 @@
 package net.sam_solutions.courses.dkrauchanka.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 
 @Entity
@@ -21,23 +19,29 @@ public class Task {
 	private String title;
 	private String text;
 	private String path;
-	private Set<User> users = new HashSet<User>(0);
+        private String status;
+        private Date endTime;
+        private Integer closed;
+	private User user;
 	
 	public Task(){
 		
 	}
 	
-	public Task(Integer id, String title, String text, String path){
+	public Task(Integer id, String title, String text, String path, String status, Integer closed, User user){
 		this.id = id;
 		this.title = title;
 		this.text = text;
 		this.path = path;
+                this.status = status;
+                this.closed = closed;
+                this.user = user;
 	}
 	
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id_task")
+	@Column(name = "tasks_id_task")
 	public Integer getId() {
 		return id;
 	}
@@ -45,7 +49,7 @@ public class Task {
 		this.id = id;
 	}
 	
-	@Column(name = "task_title", nullable = false, length = 300)
+	@Column(name = "tasks_title", nullable = false, length = 300)
 	public String getTitle() {
 		return title;
 	}
@@ -53,7 +57,7 @@ public class Task {
 		this.title = title;
 	}
 	
-	@Column(name = "task_text")
+	@Column(name = "tasks_text")
 	public String getText() {
 		return text;
 	}
@@ -61,68 +65,98 @@ public class Task {
 		this.text = text;
 	}
 	
-	@Column(name = "task_path")
+	@Column(name = "tasks_path")
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "tasks_has_users", joinColumns = { @JoinColumn(name = "tasks_id_task") }, inverseJoinColumns = { @JoinColumn(name = "users_id_user") })
-	public Set<User> getUsers() {
-		return users;
+        
+        @Column(name = "tasks_status")
+        public String getStatus(){
+            return status;
+        }
+        public void setStatus(String status){
+            this.status = status;
+        }
+        
+        @Column(name = "tasks_end_time")
+	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
+	public Date getEndTime() {
+		return endTime;
 	}
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setEndTime(Date date) {
+		this.endTime = date;
+	}
+        
+        @Column(name = "tasks_closed")
+        public Integer getClosed(){
+            return closed;
+        }
+        public void setClosed(Integer closed){
+            this.closed = closed;
+        }
+	
+	@JoinColumn(name = "tasks_users_login", referencedColumnName = "users_login")
+	@ManyToOne
+	public User getUser(){
+		return this.user;
 	}
 	
-	public void addUser(User user){
-		this.users.add(user);
+	public void setUser(User user){
+		this.user = user;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((path == null) ? 0 : path.hashCode());
-		result = prime * result + ((text == null) ? 0 : text.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Task other = (Task) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title)) {
+            return false;
+        }
+        if ((this.text == null) ? (other.text != null) : !this.text.equals(other.text)) {
+            return false;
+        }
+        if ((this.path == null) ? (other.path != null) : !this.path.equals(other.path)) {
+            return false;
+        }
+        if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
+            return false;
+        }
+        if (this.endTime != other.endTime && (this.endTime == null || !this.endTime.equals(other.endTime))) {
+            return false;
+        }
+        if (this.closed != other.closed && (this.closed == null || !this.closed.equals(other.closed))) {
+            return false;
+        }
+        if (this.user != other.user && (this.user == null || !this.user.equals(other.user))) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (path == null) {
-			if (other.path != null)
-				return false;
-		} else if (!path.equals(other.path))
-			return false;
-		if (text == null) {
-			if (other.text != null)
-				return false;
-		} else if (!text.equals(other.text))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
-	
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 83 * hash + (this.title != null ? this.title.hashCode() : 0);
+        hash = 83 * hash + (this.text != null ? this.text.hashCode() : 0);
+        hash = 83 * hash + (this.path != null ? this.path.hashCode() : 0);
+        hash = 83 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 83 * hash + (this.endTime != null ? this.endTime.hashCode() : 0);
+        hash = 83 * hash + (this.closed != null ? this.closed.hashCode() : 0);
+        hash = 83 * hash + (this.user != null ? this.user.hashCode() : 0);
+        return hash;
+    }
+        
+        
 }

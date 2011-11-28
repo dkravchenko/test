@@ -1,0 +1,49 @@
+package net.sam_solutions.courses.dkrauchanka.framework;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class SecurityManager {
+    private static SecurityManager instance;
+    private Map<String,String> map;
+    
+    private class SAXHandler extends DefaultHandler{
+        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
+	{
+            if("security-element".equals(qName)){
+                map.put(attributes.getValue("name"),attributes.getValue("userRole"));
+            }
+	}
+    }
+    
+    private SecurityManager(String path) throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
+        map = new HashMap<String,String>();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+    	SAXParser parser = factory.newSAXParser();
+    	SAXHandler handler = new SAXHandler();
+    	parser.parse(new File(path), handler);
+    }
+    
+    public boolean isAccessable(String name, String role){
+        Pattern p = Pattern.compile("\\w*guest\\w*");
+        Matcher m = p.matcher(map.get(name));
+        return m.matches();
+    }
+    
+    public static synchronized SecurityManager getInstance(String path) throws IOException, FileNotFoundException, ParserConfigurationException, SAXException{
+        if(instance == null)
+            instance = new SecurityManager(path);
+        return instance;
+    }
+}

@@ -21,7 +21,7 @@ public class TaskDAOImpl implements TaskDAO{
 	
 	public void addTask(Task task) {
 		Session session = sessionFactory.openSession();
-		session.save(task);
+		session.saveOrUpdate(task);
 		session.close();
 	}
 
@@ -43,14 +43,6 @@ public class TaskDAOImpl implements TaskDAO{
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(task);
-		transaction.commit();
-		session.close();
-	}
-	
-	public void updateTask(Task task){
-		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(task);
 		transaction.commit();
 		session.close();
 	}

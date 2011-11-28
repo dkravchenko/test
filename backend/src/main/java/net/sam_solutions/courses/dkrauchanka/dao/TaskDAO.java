@@ -9,5 +9,4 @@ public interface TaskDAO {
 	public List<Task> listTask();
 	public Task getTask(Integer id);
 	public void removeTask(Task task);
-	public void updateTask(Task task);
 }

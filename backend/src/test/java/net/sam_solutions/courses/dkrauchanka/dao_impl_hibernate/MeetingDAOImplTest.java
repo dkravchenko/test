@@ -22,38 +22,44 @@ public class MeetingDAOImplTest extends TestCase {
 	public void testAddingMeeting(){
 		MeetingDAOImpl meetingDao = new MeetingDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		User user = userDao.getUser(new Integer(1));
+		User user = new User("demon13@np.by","zdxcv","asdf","asd","user");
+                userDao.addUser(user);
 		Meeting meeting = new Meeting(null,"asd","sad",new Date(),user);
 		meetingDao.addMeeting(meeting);
 		Integer id = meeting.getId();
 		Meeting newMeeting = meetingDao.getMeeting(id);
 		assertEquals(meeting.getUser(),newMeeting.getUser());
 		meetingDao.removeMeeting(meeting);
+                userDao.removeUser(user);
 	}
 	
 	public void testRemovingMeeting(){
 		MeetingDAOImpl meetingDao = new MeetingDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		User user = userDao.getUser(new Integer(1));
+		User user = new User("demon13@np.by","zdxcv","asdf","asd","user");
+                userDao.addUser(user);
 		Meeting meeting = new Meeting(null,"asd","sad",new Date(),user);
 		meetingDao.addMeeting(meeting);
 		Integer id = meeting.getId();
 		meetingDao.removeMeeting(meeting);
 		Meeting newMeeting = meetingDao.getMeeting(id);
 		assertNull(newMeeting);
+                userDao.removeUser(user);
 	}
 	
 	public void testUpdatingMeeting(){
 		MeetingDAOImpl meetingDao = new MeetingDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		User user = userDao.getUser(new Integer(1));
+		User user = new User("demon13@np.by","zdxcv","asdf","asd","user");
+                userDao.addUser(user);
 		Meeting meeting = new Meeting(null,"asd","sad",new Date(),user);
 		meetingDao.addMeeting(meeting);
 		Integer id = meeting.getId();
-		meeting.setTitle("aaa");
-		meetingDao.updateMeeting(meeting);
+		meeting.setDescription("aaa");
+		meetingDao.addMeeting(meeting);
 		Meeting newMeeting = meetingDao.getMeeting(id);
-		assertEquals(newMeeting.getTitle(),meeting.getTitle());
+		assertEquals(newMeeting.getDescription(),meeting.getDescription());
 		meetingDao.removeMeeting(meeting);
+                userDao.removeUser(user);
 	}
 }

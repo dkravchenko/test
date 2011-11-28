@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -42,7 +42,7 @@ public class Meeting {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id_meeting")
+	@Column(name = "meetings_id_meeting")
 	public Integer getId() {
 		return id;
 	}
@@ -50,7 +50,7 @@ public class Meeting {
 		this.id = id;
 	}
 	
-	@Column(name = "meeting_title", nullable = false, length = 300)
+	@Column(name = "meetings_title", nullable = false, length = 300)
 	public String getTitle() {
 		return title;
 	}
@@ -58,7 +58,7 @@ public class Meeting {
 		this.title = title;
 	}
 	
-	@Column(name = "meeting_description")
+	@Column(name = "meetings_description")
 	public String getDescription() {
 		return description;
 	}
@@ -66,7 +66,7 @@ public class Meeting {
 		this.description = description;
 	}
 	
-	@Column(name = "meeting_date")
+	@Column(name = "meetings_date")
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	public Date getDate() {
 		return date;
@@ -76,7 +76,7 @@ public class Meeting {
 	}
 	
 	
-	@JoinColumn(name = "id_user_iniciator", referencedColumnName = "id_user")
+	@JoinColumn(name = "meetings_users_login", referencedColumnName = "users_login")
 	@ManyToOne
 	public User getUser(){
 		return this.user;
@@ -86,8 +86,8 @@ public class Meeting {
 		this.user = user;
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "users_has_meetings", joinColumns = { @JoinColumn(name = "meetings_id_meeting") }, inverseJoinColumns = { @JoinColumn(name = "users_id_user") })
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "users_has_meetings", joinColumns = { @JoinColumn(name = "users_has_meetings_id_meeting") }, inverseJoinColumns = { @JoinColumn(name = "users_has_meetings_login") })
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -141,8 +141,5 @@ public class Meeting {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
-	}
-
-	
-		
+	}	
 }
