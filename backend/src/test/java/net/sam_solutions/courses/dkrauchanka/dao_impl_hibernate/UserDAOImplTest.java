@@ -54,7 +54,7 @@ public class UserDAOImplTest{
     @Test
     public void testAddingUser(){
 	UserDAOImpl userDao = new UserDAOImpl();
-	User user = new User("demon13@np.by","asd","asd","asd","admin");
+	User user = new User("1","asd","asd","asd","admin");
 	userDao.addUser(user);
     	String login = user.getLogin();
 	User newUser = userDao.getUser(login);
@@ -65,7 +65,7 @@ public class UserDAOImplTest{
     @Test
     public void testRemovingUser(){
 	UserDAOImpl userDao = new UserDAOImpl();
-	User user = new User("demon13@np.by","asd","asd","asd","admin");
+	User user = new User("2","asd","asd","asd","admin");
 	userDao.addUser(user);
 	String login = user.getLogin();
 	userDao.removeUser(user);
@@ -76,7 +76,7 @@ public class UserDAOImplTest{
     @Test
     public void testUpdatingUser(){
 	UserDAOImpl userDao = new UserDAOImpl();
-	User user = new User("demon13@np.by","asd","asd","asd","admin");
+	User user = new User("3","asd","asd","asd","admin");
 	userDao.addUser(user);
 	user.setFirstName("aaa");
         String login = user.getLogin();

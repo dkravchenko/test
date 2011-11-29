@@ -2,5 +2,5 @@
 <root>
     <security-element name="index" userRole="user, admin"/>
     <security-element name="login" userRole="guest"/>
-    <security-element name="user/staff" userRole="admin"/>
+    <security-element name="staff" userRole="admin"/>
 </root>

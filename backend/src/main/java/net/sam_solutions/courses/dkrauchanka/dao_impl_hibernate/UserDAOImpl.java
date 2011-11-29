@@ -45,19 +45,6 @@ public class UserDAOImpl implements UserDAO{
 		session.close();
 		return user;
 	}
-        
-        public User isRegistered(String login, String pass){
-            Session session = sessionFactory.openSession();
-            List<User> list = session.createQuery("from User as user where login = '"+login+"' and pass='"+Password.hashPassword(Password.hashPassword(pass)+Password.SALT)+"'").list();
-            session.close();
-            if(list != null){
-                Iterator<User> iter = list.iterator();
-                return (User)iter.next();
-            }
-            else{
-                return null;
-            }
-        }
 
 	public void removeUser(User user) {
 		Session session = sessionFactory.openSession();

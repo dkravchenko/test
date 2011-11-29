@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <controllers>
 	<controller name="index" className="net.sam_solutions.courses.dkrauchanka.controller.HelloController"/>
+        <controller name="user/staff" className="net.sam_solutions.courses.dkrauchanka.controller.UserController"/>
         <controller name="login" className="net.sam_solutions.courses.dkrauchanka.controller.LoginController"/>
 </controllers>

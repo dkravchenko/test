@@ -2,13 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `sam_solutions` DEFAULT CHARACTER SET utf8 ;
-USE `sam_solutions` ;
+CREATE SCHEMA IF NOT EXISTS `test` DEFAULT CHARACTER SET utf8 ;
+USE `test` ;
 
 -- -----------------------------------------------------
 -- Table `sam_solutions`.`users`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sam_solutions`.`users` (
+CREATE  TABLE IF NOT EXISTS `test`.`users` (
   `users_login` VARCHAR(45) NOT NULL ,
   `users_pass` VARCHAR(40) NOT NULL ,
   `users_FN` VARCHAR(45) NULL DEFAULT NULL ,
@@ -23,7 +23,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `sam_solutions`.`tasks`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sam_solutions`.`tasks` (
+CREATE  TABLE IF NOT EXISTS `test`.`tasks` (
   `tasks_id_task` INT(11) NOT NULL AUTO_INCREMENT ,
   `tasks_title` VARCHAR(300) NOT NULL ,
   `tasks_text` TEXT NOT NULL ,
@@ -36,9 +36,9 @@ CREATE  TABLE IF NOT EXISTS `sam_solutions`.`tasks` (
   INDEX `fk_tasks_users1` (`tasks_users_login` ASC) ,
   CONSTRAINT `fk_tasks_users1`
     FOREIGN KEY (`tasks_users_login` )
-    REFERENCES `sam_solutions`.`users` (`users_login` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `test`.`users` (`users_login` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = utf8;
@@ -46,7 +46,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `sam_solutions`.`meetings`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sam_solutions`.`meetings` (
+CREATE  TABLE IF NOT EXISTS `test`.`meetings` (
   `meetings_id_meeting` INT(11) NOT NULL AUTO_INCREMENT ,
   `meetings_title` VARCHAR(300) NOT NULL ,
   `meetings_description` TEXT NULL DEFAULT NULL ,
@@ -56,9 +56,9 @@ CREATE  TABLE IF NOT EXISTS `sam_solutions`.`meetings` (
   INDEX `fk_meetings_users` (`meetings_users_login` ASC) ,
   CONSTRAINT `fk_meetings_users`
     FOREIGN KEY (`meetings_users_login` )
-    REFERENCES `sam_solutions`.`users` (`users_login` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `test`.`users` (`users_login` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8;
@@ -67,7 +67,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `sam_solutions`.`users_has_meetings`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sam_solutions`.`users_has_meetings` (
+CREATE  TABLE IF NOT EXISTS `test`.`users_has_meetings` (
   `users_has_meetings_login` VARCHAR(45) NOT NULL ,
   `users_has_meetings_id_meeting` INT(11) NOT NULL ,
   PRIMARY KEY (`users_has_meetings_login`, `users_has_meetings_id_meeting`) ,
@@ -75,14 +75,14 @@ CREATE  TABLE IF NOT EXISTS `sam_solutions`.`users_has_meetings` (
   INDEX `fk_users_has_meetings_users1` (`users_has_meetings_login` ASC) ,
   CONSTRAINT `fk_users_has_meetings_users1`
     FOREIGN KEY (`users_has_meetings_login` )
-    REFERENCES `sam_solutions`.`users` (`users_login` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `test`.`users` (`users_login` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_users_has_meetings_meetings1`
     FOREIGN KEY (`users_has_meetings_id_meeting` )
-    REFERENCES `sam_solutions`.`meetings` (`meetings_id_meeting` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `test`.`meetings` (`meetings_id_meeting` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

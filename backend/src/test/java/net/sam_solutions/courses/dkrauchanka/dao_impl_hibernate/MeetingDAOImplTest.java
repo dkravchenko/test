@@ -22,7 +22,7 @@ public class MeetingDAOImplTest extends TestCase {
 	public void testAddingMeeting(){
 		MeetingDAOImpl meetingDao = new MeetingDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		User user = new User("demon13@np.by","zdxcv","asdf","asd","user");
+		User user = new User("4","zdxcv","asdf","asd","user");
                 userDao.addUser(user);
 		Meeting meeting = new Meeting(null,"asd","sad",new Date(),user);
 		meetingDao.addMeeting(meeting);
@@ -36,7 +36,7 @@ public class MeetingDAOImplTest extends TestCase {
 	public void testRemovingMeeting(){
 		MeetingDAOImpl meetingDao = new MeetingDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		User user = new User("demon13@np.by","zdxcv","asdf","asd","user");
+		User user = new User("5","zdxcv","asdf","asd","user");
                 userDao.addUser(user);
 		Meeting meeting = new Meeting(null,"asd","sad",new Date(),user);
 		meetingDao.addMeeting(meeting);
@@ -50,7 +50,7 @@ public class MeetingDAOImplTest extends TestCase {
 	public void testUpdatingMeeting(){
 		MeetingDAOImpl meetingDao = new MeetingDAOImpl();
 		UserDAOImpl userDao = new UserDAOImpl();
-		User user = new User("demon13@np.by","zdxcv","asdf","asd","user");
+		User user = new User("6","zdxcv","asdf","asd","user");
                 userDao.addUser(user);
 		Meeting meeting = new Meeting(null,"asd","sad",new Date(),user);
 		meetingDao.addMeeting(meeting);

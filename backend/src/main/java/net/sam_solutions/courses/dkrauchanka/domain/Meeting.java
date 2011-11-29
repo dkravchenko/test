@@ -99,47 +99,47 @@ public class Meeting {
 		this.users.add(user);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Meeting other = (Meeting) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title)) {
+            return false;
+        }
+        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
+            return false;
+        }
+        if (this.date != other.date && (this.date == null || !this.date.equals(other.date))) {
+            return false;
+        }
+        if (this.user != other.user && (this.user == null || !this.user.equals(other.user))) {
+            return false;
+        }
+        if (this.users != other.users && (this.users == null || !this.users.equals(other.users))) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Meeting other = (Meeting) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}	
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 59 * hash + (this.title != null ? this.title.hashCode() : 0);
+        hash = 59 * hash + (this.description != null ? this.description.hashCode() : 0);
+        hash = 59 * hash + (this.date != null ? this.date.hashCode() : 0);
+        hash = 59 * hash + (this.user != null ? this.user.hashCode() : 0);
+        hash = 59 * hash + (this.users != null ? this.users.hashCode() : 0);
+        return hash;
+    }
+
+    
 }

@@ -124,8 +124,16 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 5;
+        hash = 83 * hash + (this.login != null ? this.login.hashCode() : 0);
+        hash = 83 * hash + (this.pass != null ? this.pass.hashCode() : 0);
+        hash = 83 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
+        hash = 83 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
+        hash = 83 * hash + (this.role != null ? this.role.hashCode() : 0);
+        hash = 83 * hash + (this.meetings != null ? this.meetings.hashCode() : 0);
         return hash;
     }
+
+    
 
     @Override
     public String toString() {

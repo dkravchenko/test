@@ -21,7 +21,9 @@ public class MeetingDAOImpl implements MeetingDAO{
 	
 	public void addMeeting(Meeting meeting) {
 		Session session = sessionFactory.openSession();
+                Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(meeting);
+                transaction.commit();
 		session.close();
 	}
 

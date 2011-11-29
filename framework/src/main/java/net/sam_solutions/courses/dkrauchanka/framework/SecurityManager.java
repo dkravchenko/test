@@ -10,11 +10,13 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class SecurityManager {
+    private static final Logger log = Logger.getLogger(SecurityManager.class);
     private static SecurityManager instance;
     private Map<String,String> map;
     
@@ -36,7 +38,7 @@ public class SecurityManager {
     }
     
     public boolean isAccessable(String name, String role){
-        Pattern p = Pattern.compile("\\w*guest\\w*");
+        Pattern p = Pattern.compile("[\\w\\W]*"+role+"[\\w\\W]*");
         Matcher m = p.matcher(map.get(name));
         return m.matches();
     }

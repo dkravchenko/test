@@ -6,10 +6,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="login" method="post">
+        <form action="login" method="get">
             <input type="text" name="login"/><br/>
             <input type="password" name="pass"/><br/>
-            <input type="submit" name="submit" value="send"/>
+            <input type="submit" name="submit" value="send"/><br/>
+            <%= request.getParameter("login")%>
+            <%= request.getParameter("pass")%>
         </form>
     </body>
 </html>

@@ -43,27 +43,28 @@ public class MainServlet extends HttpServlet {
              if(!SecurityManager.getInstance(getServletContext().getRealPath("WEB-INF/classes/security.xml")).isAccessable(requestMap, user.getRole())){
                  requestMap = "index";
              }
+             log.info(requestMap);
              action = (Action)Class.forName(ControllerManager.getInstance(getServletContext().getRealPath("WEB-INF/classes/controllers.xml")).getController(requestMap)).newInstance();
     	 }
     	 catch (FileNotFoundException e){
             action = new ErrorController(500,"Internal server error",e.getStackTrace());
-            log.fatal("File not found");
+            log.info("File not found");
          } 
     	 catch (ParserConfigurationException e){
         	 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Bad parser configuration");
+                 log.info("Bad parser configuration");
          } 
     	 catch (SAXException e){
         	 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Error while parsing xml");
+                 log.info("Error while parsing xml");
          } 
     	 catch (IOException e){
         	 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Error reading file");
+                 log.info("Error reading file");
          }
     	 catch (ClassCastException e){
     		 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Error while casting class");
+                 log.info("Error while casting class");
     	 }
     	 catch (ClassNotFoundException e){
     		 action = new ErrorController(500,"Internal server error",e.getStackTrace());
@@ -71,19 +72,19 @@ public class MainServlet extends HttpServlet {
     	 }
     	 catch (InstantiationException e){
     		 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Insctantiation error");
+                 log.info("Insctantiation error");
     	 }
     	 catch(IllegalAccessException e){
     		 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Illegal access");
+                 log.info("Illegal access");
     	 }
     	 catch(NullPointerException e){
     		 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.fatal("Null pointer");
+                 log.info("Null pointer");
     	 }
           String url = action.perform(request);
           if (url != null)
-              log.info("SUCCESS");
+              log.info("SUCCESS sada");
                getServletContext().getRequestDispatcher(url).forward(request, response);
      }
 }

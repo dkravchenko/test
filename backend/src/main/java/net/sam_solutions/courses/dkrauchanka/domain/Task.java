@@ -28,14 +28,16 @@ public class Task {
 		
 	}
 	
-	public Task(Integer id, String title, String text, String path, String status, Integer closed, User user){
+	public Task(Integer id, String title, String text, String path, String status, Date endTime, Integer closed, User user){
 		this.id = id;
 		this.title = title;
 		this.text = text;
 		this.path = path;
                 this.status = status;
+                this.endTime = endTime;
                 this.closed = closed;
                 this.user = user;
+                
 	}
 	
 	
@@ -147,16 +149,16 @@ public class Task {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 83 * hash + (this.title != null ? this.title.hashCode() : 0);
-        hash = 83 * hash + (this.text != null ? this.text.hashCode() : 0);
-        hash = 83 * hash + (this.path != null ? this.path.hashCode() : 0);
-        hash = 83 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 83 * hash + (this.endTime != null ? this.endTime.hashCode() : 0);
-        hash = 83 * hash + (this.closed != null ? this.closed.hashCode() : 0);
-        hash = 83 * hash + (this.user != null ? this.user.hashCode() : 0);
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 97 * hash + (this.title != null ? this.title.hashCode() : 0);
+        hash = 97 * hash + (this.text != null ? this.text.hashCode() : 0);
+        hash = 97 * hash + (this.path != null ? this.path.hashCode() : 0);
+        hash = 97 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 97 * hash + (this.endTime != null ? this.endTime.hashCode() : 0);
+        hash = 97 * hash + (this.closed != null ? this.closed.hashCode() : 0);
+        hash = 97 * hash + (this.user != null ? this.user.hashCode() : 0);
         return hash;
     }
-        
-        
+
+     
 }
