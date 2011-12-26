@@ -2,5 +2,13 @@
 <root>
     <security-element name="index" userRole="user, admin"/>
     <security-element name="login" userRole="guest"/>
-    <security-element name="user/staff" userRole="admin"/>
+    <security-element name="logout" userRole="user, admin"/>
+    <security-element name="user" userRole="admin"/>
+    <security-element name="report/list" userRole="admin"/>
+    <security-element name="task/rule" userRole="admin"/>
+    <security-element name="task/list" userRole="user"/>
+    <security-element name="task/self" userRole="user"/>
+    <security-element name="change/pass" userRole="user"/>
+    <security-element name="report/add" userRole="user"/>
+    <security-element name="report/self" userRole="user"/>
 </root>

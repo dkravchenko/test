@@ -9,5 +9,6 @@
   	<module>backend</module>
 	<module>framework</module>
   	<module>frontend</module>
+        <module>wicket</module>
   </modules>
 </project>

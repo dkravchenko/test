@@ -1,12 +1,16 @@
 package net.sam_solutions.courses.dkrauchanka.domain;
 
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,26 +22,24 @@ public class Task {
 	private Integer id;
 	private String title;
 	private String text;
-	private String path;
+        private Integer hoursToDo;
         private String status;
         private Date endTime;
-        private Integer closed;
 	private User user;
+        private List<Report> reports;
 	
 	public Task(){
 		
 	}
 	
-	public Task(Integer id, String title, String text, String path, String status, Date endTime, Integer closed, User user){
+	public Task(Integer id, String title, String text, Integer hoursToDo, String status, Date endTime, User user){
 		this.id = id;
 		this.title = title;
 		this.text = text;
-		this.path = path;
+		this.hoursToDo = hoursToDo;
                 this.status = status;
                 this.endTime = endTime;
-                this.closed = closed;
-                this.user = user;
-                
+                this.user = user;        
 	}
 	
 	
@@ -67,12 +69,12 @@ public class Task {
 		this.text = text;
 	}
 	
-	@Column(name = "tasks_path")
-	public String getPath() {
-		return path;
+	@Column(name = "tasks_hours_todo")
+	public Integer getHoursToDo() {
+		return hoursToDo;
 	}
-	public void setPath(String path) {
-		this.path = path;
+	public void setHoursToDo(Integer hoursToDo) {
+		this.hoursToDo = hoursToDo;
 	}
         
         @Column(name = "tasks_status")
@@ -91,14 +93,6 @@ public class Task {
 	public void setEndTime(Date date) {
 		this.endTime = date;
 	}
-        
-        @Column(name = "tasks_closed")
-        public Integer getClosed(){
-            return closed;
-        }
-        public void setClosed(Integer closed){
-            this.closed = closed;
-        }
 	
 	@JoinColumn(name = "tasks_users_login", referencedColumnName = "users_login")
 	@ManyToOne
@@ -109,6 +103,22 @@ public class Task {
 	public void setUser(User user){
 		this.user = user;
 	}
+
+        @ManyToMany(fetch = FetchType.EAGER)
+        @JoinTable(name = "reports_has_tasks", joinColumns = { @JoinColumn(name = "rtasks_id_task") }, inverseJoinColumns = { @JoinColumn(name = "treports_id_reports") })
+        public List<Report> getReports() {
+            return reports;
+        }
+
+        public void setReports(List<Report> reports) {
+           this.reports = reports;
+        }
+        
+        public void addReportToTask(Report report){
+            if(this.reports == null)
+                this.reports = new ArrayList<Report>();
+            this.reports.add(report);
+        }
 
     @Override
     public boolean equals(Object obj) {
@@ -128,16 +138,10 @@ public class Task {
         if ((this.text == null) ? (other.text != null) : !this.text.equals(other.text)) {
             return false;
         }
-        if ((this.path == null) ? (other.path != null) : !this.path.equals(other.path)) {
+        if (this.hoursToDo != other.hoursToDo && (this.hoursToDo == null || !this.hoursToDo.equals(other.hoursToDo))) {
             return false;
         }
         if ((this.status == null) ? (other.status != null) : !this.status.equals(other.status)) {
-            return false;
-        }
-        if (this.endTime != other.endTime && (this.endTime == null || !this.endTime.equals(other.endTime))) {
-            return false;
-        }
-        if (this.closed != other.closed && (this.closed == null || !this.closed.equals(other.closed))) {
             return false;
         }
         if (this.user != other.user && (this.user == null || !this.user.equals(other.user))) {
@@ -148,17 +152,18 @@ public class Task {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.title != null ? this.title.hashCode() : 0);
-        hash = 97 * hash + (this.text != null ? this.text.hashCode() : 0);
-        hash = 97 * hash + (this.path != null ? this.path.hashCode() : 0);
-        hash = 97 * hash + (this.status != null ? this.status.hashCode() : 0);
-        hash = 97 * hash + (this.endTime != null ? this.endTime.hashCode() : 0);
-        hash = 97 * hash + (this.closed != null ? this.closed.hashCode() : 0);
-        hash = 97 * hash + (this.user != null ? this.user.hashCode() : 0);
+        int hash = 3;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 17 * hash + (this.title != null ? this.title.hashCode() : 0);
+        hash = 17 * hash + (this.text != null ? this.text.hashCode() : 0);
+        hash = 17 * hash + (this.hoursToDo != null ? this.hoursToDo.hashCode() : 0);
+        hash = 17 * hash + (this.status != null ? this.status.hashCode() : 0);
+        hash = 17 * hash + (this.user != null ? this.user.hashCode() : 0);
         return hash;
     }
 
-     
+    
+
+    
+    
 }

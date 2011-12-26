@@ -24,7 +24,12 @@ public class LoginController implements Action{
                 if (user != null && user.getPass().equals(Password.hashPassword(Password.hashPassword(pass)+Password.SALT)))
                 {
                     HttpSession session = request.getSession(true);
-                    session.setAttribute("user", new SessionUser(user.getFirstName(),user.getLastName(),user.getRole()));
+                    session.setAttribute("user", new SessionUser(user.getFirstName(),user.getLastName(),user.getRole().getRole()));
+                    session.setAttribute("login", user.getLogin());
+                    if(Password.hashPassword(Password.hashPassword(user.getLogin())+Password.SALT).equals(user.getPass())){
+                        request.setAttribute("login", user.getLogin());
+                        return "/WEB-INF/jsp/changepass.jsp";
+                    }
                     return "/WEB-INF/jsp/hello.jsp";
                 }
                 else

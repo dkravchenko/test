@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <controllers>
 	<controller name="index" className="net.sam_solutions.courses.dkrauchanka.controller.HelloController"/>
-        <controller name="user/staff" className="net.sam_solutions.courses.dkrauchanka.controller.UserController"/>
+        <controller name="user" className="net.sam_solutions.courses.dkrauchanka.controller.UserController"/>
         <controller name="login" className="net.sam_solutions.courses.dkrauchanka.controller.LoginController"/>
+        <controller name="logout" className="net.sam_solutions.courses.dkrauchanka.controller.LogoutController"/>
+        <controller name="report/list" className="net.sam_solutions.courses.dkrauchanka.controller.ReportListController"/>
+        <controller name="task/rule" className="net.sam_solutions.courses.dkrauchanka.controller.TaskRuleController"/>
+        <controller name="task/list" className="net.sam_solutions.courses.dkrauchanka.controller.TaskListController"/>
+        <controller name="task/self" className="net.sam_solutions.courses.dkrauchanka.controller.TaskSelfController"/>
+        <controller name="change/pass" className="net.sam_solutions.courses.dkrauchanka.controller.ChangePassController"/>
+        <controller name="report/add" className="net.sam_solutions.courses.dkrauchanka.controller.ReportAddController"/>
+        <controller name="report/self" className="net.sam_solutions.courses.dkrauchanka.controller.ReportSelfController"/>
 </controllers>

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import net.sam_solutions.courses.dkrauchanka.utils.Password;
 
@@ -21,25 +22,19 @@ public class User {
 	private String pass;
 	private String firstName;
 	private String lastName;
-	private String role;
-	private Set<Meeting> meetings = new HashSet<Meeting>(0);
+	private Role role;
 	
 	public User(){
 		
 	}
 	
-	public User(String login, String pass, String firstName, String lastName, String role){
+	public User(String login, String pass, String firstName, String lastName, Role role){
 		this.login = login;
-		this.pass = Password.hashPassword(Password.hashPassword(pass)+Password.SALT);
+		this.pass = pass;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.role = role;
-	}
-	
-	public void setMeeting(Meeting meeting) {
-		this.meetings.add(meeting);
-	}
-	
+                this.role = role;
+	}	
 	
 	@Id
 	@Column(name = "users_login", length = 45)
@@ -74,21 +69,13 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "users_role", length = 45)
-	public String getRole() {
+        @ManyToOne
+        @JoinColumn(name = "users_role", referencedColumnName = "roles_role")
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
-	}
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "users_has_meetings", joinColumns = { @JoinColumn(name = "users_has_meetings_login") }, inverseJoinColumns = { @JoinColumn(name = "users_has_meetings_id_meeting") })
-	public Set<Meeting> getMeetings() {
-		return meetings;
-	}
-	public void setMeetings(Set<Meeting> meetings) {
-		this.meetings = meetings;
 	}
 
     @Override
@@ -112,10 +99,7 @@ public class User {
         if ((this.lastName == null) ? (other.lastName != null) : !this.lastName.equals(other.lastName)) {
             return false;
         }
-        if ((this.role == null) ? (other.role != null) : !this.role.equals(other.role)) {
-            return false;
-        }
-        if (this.meetings != other.meetings && (this.meetings == null || !this.meetings.equals(other.meetings))) {
+        if (!this.role.equals(other.getRole())) {
             return false;
         }
         return true;
@@ -123,22 +107,19 @@ public class User {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + (this.login != null ? this.login.hashCode() : 0);
-        hash = 83 * hash + (this.pass != null ? this.pass.hashCode() : 0);
-        hash = 83 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
-        hash = 83 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
-        hash = 83 * hash + (this.role != null ? this.role.hashCode() : 0);
-        hash = 83 * hash + (this.meetings != null ? this.meetings.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + (this.login != null ? this.login.hashCode() : 0);
+        hash = 59 * hash + (this.pass != null ? this.pass.hashCode() : 0);
+        hash = 59 * hash + (this.firstName != null ? this.firstName.hashCode() : 0);
+        hash = 59 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
+        hash = 59 * hash + (this.role != null ? this.role.hashCode() : 0);
         return hash;
     }
 
-    
-
     @Override
     public String toString() {
-        return "User{" + "login=" + login + ", pass=" + pass + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role + ", meetings=" + meetings + '}';
+        return "User{" + "login=" + login + ", pass=" + pass + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role + '}';
     }
-	
 
+    
 }

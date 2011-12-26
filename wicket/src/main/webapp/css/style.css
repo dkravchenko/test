@@ -1,0 +1,12 @@
+.dataView{
+    width:700px;
+}
+
+#filterTable{
+    width:100%;
+}
+
+#filter{
+    width:300px;
+    float:right;
+}

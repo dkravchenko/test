@@ -12,8 +12,9 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
-		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.User" />
-		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.Meeting" />
-		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.Task" />
+		<mapping class="net.sam_solutions.courses.dkrauchanka.domain.Role" />
+                <mapping class="net.sam_solutions.courses.dkrauchanka.domain.User" />
+                <mapping class="net.sam_solutions.courses.dkrauchanka.domain.Task" />
+                <mapping class="net.sam_solutions.courses.dkrauchanka.domain.Report" />
 	</session-factory>
 </hibernate-configuration>

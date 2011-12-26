@@ -1,13 +1,13 @@
 package net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate;
 
-import java.util.Iterator;
 import java.util.List;
 
 import net.sam_solutions.courses.dkrauchanka.dao.UserDAO;
+import net.sam_solutions.courses.dkrauchanka.domain.Role;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.utils.HibernateUtil;
 
-import net.sam_solutions.courses.dkrauchanka.utils.Password;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -28,14 +28,29 @@ public class UserDAOImpl implements UserDAO{
 		session.close();
 	}
 
-	public List<User> listUser() {
+	public List<User> listUser(int page, int count) {
 		Session session = sessionFactory.openSession();
-                //Transaction transaction = session.beginTransaction();
-		List<User> list = session.createQuery("from User").list();
-                //transaction.commit();
+                Transaction transaction = session.beginTransaction();
+                RoleDAOImpl roleDao = new RoleDAOImpl();
+                Role role = roleDao.getRole("user");
+                Query query = (Query)session.createQuery("from User where role=:role").setParameter("role", role);
+                query.setFirstResult((page-1)*count);
+                query.setMaxResults(count);
+		List<User> list = query.list();
+                transaction.commit();
 		session.close();
 		return list;
 	}
+        
+        public Long countUser(){
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("select count(*) from User");
+            Long temp = (Long) query.uniqueResult();
+            transaction.commit();
+            session.close();
+            return temp;
+        }
 	
 	public User getUser(String login){
 		Session session = sessionFactory.openSession();
