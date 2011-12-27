@@ -10,6 +10,7 @@ import net.sam_solutions.courses.dkrauchanka.domain.Report;
 import net.sam_solutions.courses.dkrauchanka.domain.Task;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
+import net.sam_solutions.courses.dkrauchanka.dto.TaskDTOWicket;
 
 public class TaskService {
     private TaskDAOImpl taskDao;
@@ -30,9 +31,19 @@ public class TaskService {
         return TaskDTO.taskToTaskDTOList(list);
     }
     
+    public List<TaskDTOWicket> listTaskWicket(int page, int count){
+        List<Task> list = taskDao.listTask(page, count);
+        return TaskDTOWicket.taskToTaskDTOList(list);
+    }
+    
     public List<TaskDTO> listTaskByUser(int page, int count, String login){
         List<Task> list = taskDao.listTaskByUser(page, count, login);
         return TaskDTO.taskToTaskDTOList(list);
+    }
+    
+    public List<TaskDTOWicket> listTaskByUserWicket(int page, int count, String login){
+        List<Task> list = taskDao.listTaskByUser(page, count, login);
+        return TaskDTOWicket.taskToTaskDTOList(list);
     }
     
     public Integer getPagesCount(int onPage, String filterName, String filterValue){
@@ -101,6 +112,12 @@ public class TaskService {
         TaskDAOImpl taskDao = new TaskDAOImpl();
         Task task = taskDao.getTask(id);
         return new TaskDTO(task);
+    }
+    
+    public TaskDTOWicket getTaskWicket(Integer id){
+        TaskDAOImpl taskDao = new TaskDAOImpl();
+        Task task = taskDao.getTask(id);
+        return new TaskDTOWicket(task);
     }
     
     public void addNewTask(Integer id, String title, String text, Integer hours, String status, String login){

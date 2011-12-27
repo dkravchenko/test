@@ -97,6 +97,12 @@ public class UserDTO implements IClusterable{
         hash = 13 * hash + (this.lastName != null ? this.lastName.hashCode() : 0);
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return firstName + ", " + lastName;
+    }
+    
     
     
 }
