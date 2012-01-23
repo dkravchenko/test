@@ -14,15 +14,14 @@ import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.ajax.markup.html.repeater.data.table.AjaxFallbackDefaultDataTable;
 import net.sam_solutions.courses.dkrauchanka.SelectOption;
-import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
-import net.sam_solutions.courses.dkrauchanka.service.TaskService;
+import net.sam_solutions.courses.dkrauchanka.constants.Constants;
+import net.sam_solutions.courses.dkrauchanka.panels.TablePanel;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 
@@ -31,24 +30,9 @@ public class ReportList extends BasePage{
     final FeedbackPanel feedBack = new FeedbackPanel("feedback");
     private AjaxFallbackDefaultDataTable<ReportDTO> table;
     private List<IColumn<ReportDTO>> columns;
-    class TablePanel extends Panel{
-        private AjaxFallbackDefaultDataTable<ReportDTO> table;
-        
-        TablePanel(String name, AjaxFallbackDefaultDataTable<ReportDTO> table){
-            super(name);
-            this.table = table;
-            this.add(table);
-        }
-        
-        public void refreshTable(AjaxFallbackDefaultDataTable<ReportDTO> table){
-            this.remove(this.table);
-            this.table = table;
-            this.add(table);
-        }
-    }
     public SelectOption selected = new SelectOption("0","...");
     public SelectOption selectedTask = new SelectOption("0","...");
-    private TablePanel panel;
+    private TablePanel<ReportDTO> panel;
     
   
     public ReportList(){
@@ -60,7 +44,7 @@ public class ReportList extends BasePage{
         columns.add(new PropertyColumn<ReportDTO>(new ResourceModel("label.user"),"user"));
         columns.add(new PropertyColumn<ReportDTO>(new ResourceModel("label.tasks"),"tasks"));
         
-        table = new AjaxFallbackDefaultDataTable<ReportDTO>("table", columns, new ReportDataProvider(),10);
+        table = new AjaxFallbackDefaultDataTable<ReportDTO>("table", columns, new ReportDataProvider(),Constants.ROWS_ON_PAGE);
         panel = new TablePanel("tablePanel",table);
         panel.setOutputMarkupId(true);
         add(panel);
@@ -85,11 +69,11 @@ public class ReportList extends BasePage{
         dropDown.add(new AjaxFormComponentUpdatingBehavior("onchange"){
             protected void onUpdate(AjaxRequestTarget target){
                 if(selected.equals(new SelectOption("0","..."))){
-                    table = new AjaxFallbackDefaultDataTable<ReportDTO>("table", columns, new ReportDataProvider(),10);
+                    table = new AjaxFallbackDefaultDataTable<ReportDTO>("table", columns, new ReportDataProvider(),Constants.ROWS_ON_PAGE);
                 }
                 else{
                     selectedTask = new SelectOption("0","...");
-                    table = new AjaxFallbackDefaultDataTable<ReportDTO>("table", columns, new ReportByUserDataProvider(selected.getKey()),10);
+                    table = new AjaxFallbackDefaultDataTable<ReportDTO>("table", columns, new ReportByUserDataProvider(selected.getKey()),Constants.ROWS_ON_PAGE);
                 }
                 panel.refreshTable(table);
                 target.add(panel);

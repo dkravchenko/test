@@ -11,8 +11,8 @@ public class UserDataProvider extends SortableDataProvider<UserDTO>{
     private UserService userService = new UserService();
 
     public Iterator<UserDTO> iterator(int first, int count) {
-        Integer page = (int)Math.ceil(first/10)+1;
-        return userService.listUsers(page, 10).iterator();
+        Integer page = (int)Math.ceil(first/count)+1;
+        return userService.listUsers(page, count).iterator();
     }
 
     public int size() {

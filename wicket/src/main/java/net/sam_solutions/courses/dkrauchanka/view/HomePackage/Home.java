@@ -1,15 +1,20 @@
 package net.sam_solutions.courses.dkrauchanka.view.HomePackage;
 
+import net.sam_solutions.courses.dkrauchanka.SignInSession;
+import net.sam_solutions.courses.dkrauchanka.service.UserService;
 import net.sam_solutions.courses.dkrauchanka.view.BasePagePackage.BasePage;
-import org.apache.wicket.authorization.Action;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
+import net.sam_solutions.courses.dkrauchanka.view.ChangePassPackage.ChangePass;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.markup.html.basic.Label;
 
 @AuthorizeInstantiation({"user","admin"})
 public class Home extends BasePage{
     
     public Home(){
         super();
+        UserService userService = new UserService();
+        String login = ((SignInSession)this.getSession()).getLogin();
+        if(userService.userValidate(login,login)){
+            this.setResponsePage(ChangePass.class);
+        }
     }
 }

@@ -1,11 +1,11 @@
 package net.sam_solutions.courses.dkrauchanka.detachable_models;
 
 import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
-import net.sam_solutions.courses.dkrauchanka.dto.TaskDTOWicket;
+import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
 import net.sam_solutions.courses.dkrauchanka.service.TaskService;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-public class DetachableTaskModel extends LoadableDetachableModel<TaskDTOWicket>{
+public class DetachableTaskModel extends LoadableDetachableModel<TaskDTO>{
     private final Integer id;
     
     public DetachableTaskModel(Integer id){
@@ -15,14 +15,14 @@ public class DetachableTaskModel extends LoadableDetachableModel<TaskDTOWicket>{
         this.id = id;
     }
     
-    public DetachableTaskModel(TaskDTOWicket task){
+    public DetachableTaskModel(TaskDTO task){
         this(task.getId());
     }
     
     @Override
-    protected TaskDTOWicket load() {
+    protected TaskDTO load() {
         TaskService taskService = new TaskService();
-        return taskService.getTaskWicket(id);
+        return taskService.getTask(id);
     }
 
     @Override

@@ -15,13 +15,18 @@ import net.sam_solutions.courses.dkrauchanka.domain.Task;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.utils.ConnectionPoolUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 public class TaskDAOImpl implements TaskDAO{
     public static final Logger log = Logger.getLogger(TaskDAOImpl.class);
+    private BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+    private ConnectionPoolUtil util = (ConnectionPoolUtil) factory.getBean("ConnectionPoolUtil");
     
     @Override
     public void addTask(Task task) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         try{
             ResultSet rs = null;
             String sql = null;
@@ -106,7 +111,7 @@ public class TaskDAOImpl implements TaskDAO{
     @Override
     public List<Task> listTask(int page, int count) {
         List<Task> temp = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT tasks_id_task, tasks_title,tasks_text,tasks_hours_todo,tasks_status,tasks_end_time,tasks_users_login,treports_id_reports FROM tasks INNER JOIN reports_has_tasks ON tasks_id_task=rtasks_id_task;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -148,7 +153,7 @@ public class TaskDAOImpl implements TaskDAO{
     
     public List<Task> listTaskByUser(User us) {
         List<Task> temp = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT tasks_id_task, tasks_title,tasks_text,tasks_hours_todo,tasks_status,tasks_end_time,tasks_users_login,treports_id_reports FROM tasks INNER JOIN reports_has_tasks ON tasks_id_task=rtasks_id_task WHERE tasks_users_login=?;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -191,7 +196,7 @@ public class TaskDAOImpl implements TaskDAO{
     @Override
     public Task getTask(Integer id) {
         Task task = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT tasks_id_task, tasks_title,tasks_text,tasks_hours_todo,tasks_status,tasks_end_time,tasks_users_login,rtasks_id_task,treports_id_reports FROM tasks INNER JOIN reports_has_tasks ON tasks_id_task=rtasks_id_task WHERE tasks_id_task=?;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -232,7 +237,7 @@ public class TaskDAOImpl implements TaskDAO{
 
     @Override
     public void removeTask(Task task) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "DELETE FROM tasks WHERE tasks_id_task=?;";
         log.info(sql);
         try{

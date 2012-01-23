@@ -2,6 +2,7 @@ package net.sam_solutions.courses.dkrauchanka.view.UserRulePackage;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.sam_solutions.courses.dkrauchanka.constants.Constants;
 import net.sam_solutions.courses.dkrauchanka.dto.UserDTO;
 import net.sam_solutions.courses.dkrauchanka.providers.UserDataProvider;
 import net.sam_solutions.courses.dkrauchanka.service.UserService;
@@ -25,7 +26,6 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.util.time.Duration;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -111,7 +111,7 @@ public class UserRule extends BasePage{
             }
         });
         
-        table = new AjaxFallbackDefaultDataTable<UserDTO>("table", columns, new UserDataProvider(),10);
+        table = new AjaxFallbackDefaultDataTable<UserDTO>("table", columns, new UserDataProvider(),Constants.ROWS_ON_PAGE);
         add(table);
         add(feedBack);
         feedBack.setOutputMarkupId(true);

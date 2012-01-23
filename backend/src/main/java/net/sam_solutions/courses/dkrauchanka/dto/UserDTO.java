@@ -1,30 +1,12 @@
 package net.sam_solutions.courses.dkrauchanka.dto;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
-import org.apache.wicket.IClusterable;
 
-public class UserDTO implements IClusterable{
+public class UserDTO{
     private String login;
     private String firstName;
     private String lastName;
     
-    public static List<UserDTO> userToUserDTOList(List<User> list){
-        try{
-            List<UserDTO> temp = new ArrayList<UserDTO>();
-            Iterator<User> iter = list.iterator();
-            while(iter.hasNext()){
-                UserDTO userDto = new UserDTO(iter.next());
-                temp.add(userDto);
-            }
-            return temp;
-        }
-        catch(NullPointerException e){
-            return null;
-        }
-    }
     
     public UserDTO(){
         

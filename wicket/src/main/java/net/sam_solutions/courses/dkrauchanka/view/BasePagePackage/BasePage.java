@@ -1,5 +1,8 @@
 package net.sam_solutions.courses.dkrauchanka.view.BasePagePackage;
 
+import java.util.Locale;
+import net.sam_solutions.courses.dkrauchanka.SignInSession;
+import net.sam_solutions.courses.dkrauchanka.view.ChangePassPackage.ChangePass;
 import net.sam_solutions.courses.dkrauchanka.view.LogoutPackage.Logout;
 import net.sam_solutions.courses.dkrauchanka.view.ReportAddPackage.ReportAdd;
 import net.sam_solutions.courses.dkrauchanka.view.ReportListPackage.ReportList;
@@ -12,6 +15,7 @@ import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
 public class BasePage extends WebPage{
@@ -43,6 +47,7 @@ public class BasePage extends WebPage{
     private static final class AllMenu extends Panel{
         public AllMenu(String id){
             super(id);
+            add(new BookmarkablePageLink("page9Link", ChangePass.class));
             add(new BookmarkablePageLink("page4Link", Logout.class));
         }
     }
@@ -51,5 +56,19 @@ public class BasePage extends WebPage{
         add(new AdminMenu("adminMenu"));
         add(new UserMenu("userMenu"));
         add(new AllMenu("allMenu"));
+        add(new Link("russian") {
+
+            @Override
+            public void onClick() {
+                ((SignInSession)this.getSession()).setLocale(new Locale("ru"));
+            }
+        });
+        add(new Link("english") {
+
+            @Override
+            public void onClick() {
+                ((SignInSession)this.getSession()).setLocale(Locale.ENGLISH);
+            }
+        });
     }
 }

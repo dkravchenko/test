@@ -1,9 +1,10 @@
 <wicket:extend>
-    <div id="page">
-    <table class="dataView" cellspasing="0" wicket:id="table">[table]</table>
+    <h3><wicket:message key="header"></wicket:message></h3><br/>
+    <table cellpadding="0" cellspasing="0" wicket:id="table">[table]</table><br/>
     
     <form wicket:id="addUserForm">
-        <table>
+        <h3><wicket:message key="adding"></wicket:message></h3><br/>
+        <table class="form_table">
         <tr>
             <td>
                 <label wicket:id="login-label">12</label>
@@ -33,12 +34,11 @@
                 
             </td>
             <td>
-                <input type="submit" wicket:id="ajax-button" value="Add"/>
-                <input type="submit" wicket:id="ajax-update-button" value="Update"/>
+                <input type="submit" wicket:id="ajax-button" value="<wicket:message key='button.add'></wicket:message>"/>
+                <input type="submit" wicket:id="ajax-update-button" value="<wicket:message key='button.update'></wicket:message>"/>
             </td>
         </tr>
     </table>
     </form><br/>
     <span wicket:id="feedback"/>
-    </div>
 </wicket:extend>

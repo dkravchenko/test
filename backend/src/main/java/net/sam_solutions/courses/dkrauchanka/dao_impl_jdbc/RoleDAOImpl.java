@@ -4,19 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import net.sam_solutions.courses.dkrauchanka.dao.RoleDAO;
 import net.sam_solutions.courses.dkrauchanka.domain.Role;
 import net.sam_solutions.courses.dkrauchanka.utils.ConnectionPoolUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 public class RoleDAOImpl implements RoleDAO{
     public static final Logger log = Logger.getLogger(RoleDAOImpl.class);
+    private BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+    private ConnectionPoolUtil util = (ConnectionPoolUtil) factory.getBean("ConnectionPoolUtil");
+    
     @Override
     public void addRole(Role role) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         try {
             String sql;
             PreparedStatement stmt;
@@ -55,7 +60,7 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
     public List<Role> listRole() {
         List<Role> temp = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM roles;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -85,7 +90,7 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public void removeRole(Role role) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "DELETE FROM roles WHERE roles_role=?;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -108,7 +113,7 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
     public Role getRole(String rol) {
         Role role = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM roles WHERE roles_role=?;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);

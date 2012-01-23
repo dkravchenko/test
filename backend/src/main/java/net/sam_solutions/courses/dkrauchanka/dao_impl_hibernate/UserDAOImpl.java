@@ -1,5 +1,7 @@
 package net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate;
 
+
+
 import java.util.List;
 
 import net.sam_solutions.courses.dkrauchanka.dao.UserDAO;

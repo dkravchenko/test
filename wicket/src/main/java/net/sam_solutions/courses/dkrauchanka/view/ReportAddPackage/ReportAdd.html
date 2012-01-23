@@ -1,3 +1,30 @@
 <wicket:extend>
-    ReportAdd! 
+    <h3><wicket:message key="header"></wicket:message></h3><br/>
+    <form wicket:id="reportAddForm">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" wicket:id="hoursField" name="hoursField"/>
+                </td>
+                <td>
+                    <input type="text" wicket:id="textField0" name="textField0"/><br/>
+                    <input type="text" wicket:id="textField1" name="textField1"/><br/>
+                    <input type="text" wicket:id="textField2" name="textField2"/><br/>
+                    <input type="text" wicket:id="textField3" name="textField3"/><br/>
+                    <input type="text" wicket:id="textField4" name="textField4"/><br/>
+                </td>
+                <td>
+                    <select name="task" wicket:id="task"></select><br/>
+                    <label wicket:id="label0"></label><br/>
+                    <label wicket:id="label1"></label><br/>
+                    <label wicket:id="label2"></label><br/>
+                    <label wicket:id="label3"></label><br/>
+                    <label wicket:id="label4"></label><br/>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" wicket:id="ajax-button" value="<wicket:message key='button.addReport'></wicket:message>"/>
+    </form>
+    
+    <span wicket:id="feedback"/>
 </wicket:extend>

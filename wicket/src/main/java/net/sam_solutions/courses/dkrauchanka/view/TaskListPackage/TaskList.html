@@ -1,3 +1,22 @@
 <wicket:extend>
-    TaskList! 
+    <h3><wicket:message key="header"></wicket:message></h3><br/>
+    <span wicket:id="tablePanel">
+            
+    </span><br/>
+    <div id="filter">
+        <h3><wicket:message key="filter.header"></wicket:message></h3><br/>
+    <form wicket:id="filterForm">
+        <table class="form_table">
+            <tr>
+                <td>
+                    <wicket:message key="filter.byuser"></wicket:message>
+                </td>
+                <td>
+                    <select name="userFilter" wicket:id="userFilter"></select>
+                </td>
+            </tr>
+        </table>
+    </form>
+        <span wicket:id="feedback"/>
+    </div>
 </wicket:extend>

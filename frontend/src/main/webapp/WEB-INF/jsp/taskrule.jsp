@@ -58,7 +58,7 @@
                 <%= taskDto.getStatus() %>
             </td>
             <td>
-                <%= taskDto.getUserDto().getFirstName()+" "+taskDto.getUserDto().getLastName() %>
+                <%= taskDto.getUser() %>
             </td>
             <td>
                 <a href="<%= request.getContextPath() %>/task/rule?page=<%= request.getAttribute("currentPage") %>&task_id=<%= taskDto.getId() %>&action=delete"><user:locale value="all.remove"/></a>
@@ -108,7 +108,7 @@
                         if(taskDto.getHoursToDo() != null)
                             hours = String.valueOf(taskDto.getHoursToDo());
                         status = taskDto.getStatus();
-                        login = taskDto.getUserDto().getLogin();
+                        login = taskDto.getLogin();
                         if(error == null || request.getParameter("action_form").equals("update")){
                             action = "update";
                         }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
+import net.sam_solutions.courses.dkrauchanka.constants.Constants;
 import net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImpl;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
@@ -13,8 +14,6 @@ import net.sam_solutions.courses.dkrauchanka.service.TaskService;
 import net.sam_solutions.courses.dkrauchanka.service.UserService;
 
 public class TaskRuleController implements Action{
-    private Integer number = 10;
-    
     @Override
     public String perform(HttpServletRequest request) {
         TaskService taskService = new TaskService();
@@ -51,22 +50,22 @@ public class TaskRuleController implements Action{
                 hoursInt = Integer.valueOf(hours);
             if(title == null || title.equals("")){
                 error = rs.getString("error.titlenull");
-                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
                 request.setAttribute("error", error);
             }
             else if(text == null || text.equals("")){
                 error = rs.getString("error.textnull");
-                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
                 request.setAttribute("error", error);
             }
             else if (!p.matcher(hours).matches()){
                 error = rs.getString("error.notnumber");
-                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
                 request.setAttribute("error", error);
             }
             else if(status == null || status.equals("")){
                 error = rs.getString("error.statusnull");
-                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToUpdate", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
                 request.setAttribute("error", error);
             }
             else {
@@ -84,12 +83,12 @@ public class TaskRuleController implements Action{
         }
         List<TaskDTO> list = null;
         if(request.getParameter("filter_user") != null && !request.getParameter("filter_user").equals("0")){
-            list = taskService.listTaskByUser(page, number, request.getParameter("filter_user"));
-            request.setAttribute("pages",taskService.getPagesCount(number, "filter_user", request.getParameter("filter_user") ));
+            list = taskService.listTaskByUser(page, Constants.ROWS_ON_PAGE, request.getParameter("filter_user"));
+            request.setAttribute("pages",taskService.getPagesCount(Constants.ROWS_ON_PAGE, "filter_user", request.getParameter("filter_user") ));
         }
         else{
-            list = taskService.listTask(page, number);
-            request.setAttribute("pages",taskService.getPagesCount(number, null, null ));
+            list = taskService.listTask(page, Constants.ROWS_ON_PAGE);
+            request.setAttribute("pages",taskService.getPagesCount(Constants.ROWS_ON_PAGE, null, null ));
         }
         
         List<UserDTO> listUs = userService.listUsers(1, userService.getPagesCount(1));

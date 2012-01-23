@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
+import net.sam_solutions.courses.dkrauchanka.constants.Constants;
 import net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImpl;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
@@ -11,8 +12,6 @@ import net.sam_solutions.courses.dkrauchanka.framework.Action;
 import net.sam_solutions.courses.dkrauchanka.service.TaskService;
 
 public class TaskSelfController implements Action{
-    private Integer number = 10;
-        
     @Override
     public String perform(HttpServletRequest request) {
         ResourceBundle rs = ResourceBundle.getBundle("text", request.getLocale());
@@ -60,19 +59,19 @@ public class TaskSelfController implements Action{
                 hoursInt = Integer.valueOf(hours);
             if(title == null || title.equals("")){
                 add_error = rs.getString("error.titlenull");
-                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
             }
             else if(text == null || text.equals("")){
                 add_error = rs.getString("error.textnull");
-                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
             }
             else if (!p.matcher(hours).matches()){
                 add_error = rs.getString("error.notnumber");
-                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
             }
             else if(status == null || status.equals("")){
                 add_error = rs.getString("error.statusnull");
-                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user));
+                request.setAttribute("taskToAdd", new TaskDTO(idInt,title,text,hoursInt,status,user.getFirstName()+" "+user.getLastName(),user.getLogin()));
             }
             else {
                 taskService.addNewTask(null, title, text, Integer.valueOf(hours), status, user.getLogin());
@@ -82,8 +81,8 @@ public class TaskSelfController implements Action{
         if(request.getParameter("page") != null && !request.getParameter("page").equals("")){
             page = Integer.valueOf(request.getParameter("page"));
         }
-        List<TaskDTO> list = taskService.listTaskByUser(page, number, (String)request.getSession().getAttribute("login"));
-        request.setAttribute("pages",taskService.getPagesCount(number, "filter_user", (String)request.getSession().getAttribute("login") ));
+        List<TaskDTO> list = taskService.listTaskByUser(page, Constants.ROWS_ON_PAGE, (String)request.getSession().getAttribute("login"));
+        request.setAttribute("pages",taskService.getPagesCount(Constants.ROWS_ON_PAGE, "filter_user", (String)request.getSession().getAttribute("login") ));
         request.setAttribute("taskList", list);
         request.setAttribute("error", error);
         request.setAttribute("add_error", add_error);

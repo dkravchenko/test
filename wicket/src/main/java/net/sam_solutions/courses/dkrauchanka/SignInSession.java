@@ -23,7 +23,7 @@ public final class SignInSession extends AuthenticatedWebSession{
             User us = userDao.getUser(username);
             if (us != null && us.getPass().equals(Password.hashPassword(Password.hashPassword(password)+Password.SALT)))
             {
-                user = new SessionUser(us.getFirstName()+" "+us.getLastName(),us.getRole().getRole());
+                user = new SessionUser(us.getLogin(),us.getRole().getRole());
             }
         }
 
@@ -42,5 +42,8 @@ public final class SignInSession extends AuthenticatedWebSession{
         return user;
     }
     
+    public String getLogin(){
+        return user.getName();
+    }
     
 }

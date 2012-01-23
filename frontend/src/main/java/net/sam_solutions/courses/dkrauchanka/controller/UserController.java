@@ -3,13 +3,13 @@ package net.sam_solutions.courses.dkrauchanka.controller;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
+import net.sam_solutions.courses.dkrauchanka.constants.Constants;
 import net.sam_solutions.courses.dkrauchanka.dto.UserDTO;
 import net.sam_solutions.courses.dkrauchanka.framework.Action;
 import net.sam_solutions.courses.dkrauchanka.service.UserService;
 
 public class UserController implements Action{
-    private Integer number = 10;
-    
+    @Override
     public String perform(HttpServletRequest request){
         UserService userService = new UserService();
         String action = request.getParameter("action");
@@ -54,10 +54,10 @@ public class UserController implements Action{
         if(request.getParameter("page") != null && !request.getParameter("page").equals("")){
             page = Integer.valueOf(request.getParameter("page"));
         }
-        List<UserDTO> list = userService.listUsers(page, number);
+        List<UserDTO> list = userService.listUsers(page, Constants.ROWS_ON_PAGE);
         request.setAttribute("userList", list);
         request.setAttribute("currentPage", page);
-        request.setAttribute("pages",userService.getPagesCount(number));
+        request.setAttribute("pages",userService.getPagesCount(Constants.ROWS_ON_PAGE));
         return "/WEB-INF/jsp/user.jsp";
     }
 }

@@ -1,5 +1,9 @@
 package net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate;
 
+import net.sam_solutions.courses.dkrauchanka.utils.HSQLDBUtil;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.junit.BeforeClass;
 import java.util.Date;
 import net.sam_solutions.courses.dkrauchanka.utils.Password;
@@ -8,7 +12,6 @@ import org.junit.Test;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.domain.Role;
 import net.sam_solutions.courses.dkrauchanka.domain.Report;
-import net.sam_solutions.courses.dkrauchanka.utils.HSQLDBUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -17,7 +20,9 @@ public class TestReportDAOImplHibernate {
     
     @BeforeClass
     public static void before(){
-        HSQLDBUtil.getInstance().prepare();
+        BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+        HSQLDBUtil util = (HSQLDBUtil) factory.getBean("HSQLDBUtil");
+        util.prepare();
     }
     
     @Test

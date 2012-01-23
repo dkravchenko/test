@@ -9,8 +9,8 @@ import net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImpl;
 import net.sam_solutions.courses.dkrauchanka.domain.Report;
 import net.sam_solutions.courses.dkrauchanka.domain.Task;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
+import net.sam_solutions.courses.dkrauchanka.dto.DTOConverter;
 import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
-import net.sam_solutions.courses.dkrauchanka.dto.TaskDTOWicket;
 
 public class TaskService {
     private TaskDAOImpl taskDao;
@@ -28,26 +28,15 @@ public class TaskService {
     
     public List<TaskDTO> listTask(int page, int count){
         List<Task> list = taskDao.listTask(page, count);
-        return TaskDTO.taskToTaskDTOList(list);
-    }
-    
-    public List<TaskDTOWicket> listTaskWicket(int page, int count){
-        List<Task> list = taskDao.listTask(page, count);
-        return TaskDTOWicket.taskToTaskDTOList(list);
+        return DTOConverter.taskToTaskDTOList(list);
     }
     
     public List<TaskDTO> listTaskByUser(int page, int count, String login){
         List<Task> list = taskDao.listTaskByUser(page, count, login);
-        return TaskDTO.taskToTaskDTOList(list);
-    }
-    
-    public List<TaskDTOWicket> listTaskByUserWicket(int page, int count, String login){
-        List<Task> list = taskDao.listTaskByUser(page, count, login);
-        return TaskDTOWicket.taskToTaskDTOList(list);
+        return DTOConverter.taskToTaskDTOList(list);
     }
     
     public Integer getPagesCount(int onPage, String filterName, String filterValue){
-        TaskDAOImpl taskDao = new TaskDAOImpl();
         Long count = null;
         if(filterName != null && filterName.equals("filter_user")){
             count = taskDao.countTaskByUser(filterValue);
@@ -62,13 +51,13 @@ public class TaskService {
         UserDAOImpl userDao = new UserDAOImpl();
         User user = userDao.getUser(login);
         List<Task> list = taskDao.listTaskByUser(user,page,count);
-        List<TaskDTO> listDto = TaskDTO.taskToTaskDTOList(list);
+        List<TaskDTO> listDto = DTOConverter.taskToTaskDTOList(list);
         return listDto;
     }
     
     public List<TaskDTO> showUserUnclosedTasks(String login, int page, int count){
         List<Task> list = taskDao.listUnclosedTaskByUser(page,count,login);
-        List<TaskDTO> listDto = TaskDTO.taskToTaskDTOList(list);
+        List<TaskDTO> listDto = DTOConverter.taskToTaskDTOList(list);
         return listDto;
     }
     
@@ -103,21 +92,13 @@ public class TaskService {
     }
     
     public void removeTask(Integer id){
-        TaskDAOImpl taskDao = new TaskDAOImpl();
         Task task = taskDao.getTask(id);
         taskDao.removeTask(task);
     }
     
     public TaskDTO getTask(Integer id){
-        TaskDAOImpl taskDao = new TaskDAOImpl();
         Task task = taskDao.getTask(id);
         return new TaskDTO(task);
-    }
-    
-    public TaskDTOWicket getTaskWicket(Integer id){
-        TaskDAOImpl taskDao = new TaskDAOImpl();
-        Task task = taskDao.getTask(id);
-        return new TaskDTOWicket(task);
     }
     
     public void addNewTask(Integer id, String title, String text, Integer hours, String status, String login){

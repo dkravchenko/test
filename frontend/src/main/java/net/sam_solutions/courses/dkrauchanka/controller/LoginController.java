@@ -1,6 +1,5 @@
 package net.sam_solutions.courses.dkrauchanka.controller;
 
-import javax.servlet.http.Cookie;
 import net.sam_solutions.courses.dkrauchanka.framework.Action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

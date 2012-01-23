@@ -1,9 +1,22 @@
 <html>
 <head>
+    <wicket:head>
+        <link rel="stylesheet" type="text/css" href="css/master.css"/>
+    </wicket:head>
     <title>Sign In</title>
 </head>
 <body>
-    <h2><wicket:message key="signin"></wicket:message></h2>
-    <span wicket:id="signInPanel"/>
-</body>
+    <div id="header">
+		
+		<h1><a href="#" title="Go Home">Celestial <span>A free task manager</span></a></h1>
+		
+		<div class="tree"></div>
+	</div><!--/header-->
+	
+		<div id="signin">
+                    <h3><wicket:message key="signin"></wicket:message></h3>
+                    <span wicket:id="signInPanel"/>
+                        
+                </div><!--/content-->
+    </body>
 </html>

@@ -58,7 +58,7 @@
                 <%= taskDto.getStatus() %>
             </td>
             <td>
-                <%= taskDto.getUserDto().getFirstName()+" "+taskDto.getUserDto().getLastName() %>
+                <%= taskDto.getLogin() %>
             </td>
             <%
                 if(!taskDto.getStatus().equals("closed"))
@@ -170,7 +170,7 @@
                     text = taskDto.getText();
                     hours = String.valueOf(taskDto.getHoursToDo());
                     status = taskDto.getStatus();
-                    us = taskDto.getUserDto().getFirstName()+taskDto.getUserDto().getLastName();        
+                    us = taskDto.getUser();        
                 }
             %>
             <font color="#FF0000">

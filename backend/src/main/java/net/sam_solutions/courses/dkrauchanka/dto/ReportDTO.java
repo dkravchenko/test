@@ -1,6 +1,5 @@
 package net.sam_solutions.courses.dkrauchanka.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -32,40 +31,18 @@ public class ReportDTO {
         this.user = report.getUser().getFirstName()+" "+report.getUser().getLastName();
         List<Task> tasks = report.getTasks();
         String taskStr = "";
-        Iterator<Task> iterTask = tasks.iterator();
-        while(iterTask.hasNext()){
-             Task task = iterTask.next();
-             taskStr += task.getTitle() + ", ";
-        }
-        if(tasks.size() >= 1)
-             taskStr.substring(0, taskStr.lastIndexOf(",")-1);
-        this.tasks = taskStr;
-    }
-    
-    public static List<ReportDTO> reportListToReportDTOList(List<Report> list){
-        if(list != null){
-            List<ReportDTO> temp = new ArrayList<ReportDTO>();
-            Iterator<Report> iter = list.iterator();
-            while(iter.hasNext()){
-                Report report = iter.next();
-                List<Task> tasks = report.getTasks();
-                String taskStr = "";
-                Iterator<Task> iterTask = tasks.iterator();
-                while(iterTask.hasNext()){
-                    Task task = iterTask.next();
-                    taskStr += task.getTitle() + ", ";
-                }
-                if(tasks.size() >= 1)
-                    taskStr.substring(0, taskStr.lastIndexOf(","));
-                ReportDTO reportDto = new ReportDTO(report.getId(),report.getDateOfReport(),report.getWorgingHours(),report.getDoneHours(),report.getUser().getFirstName()+" "+report.getUser().getLastName(),taskStr);
-                temp.add(reportDto);
+        if(tasks != null) {
+            Iterator<Task> iterTask = tasks.iterator();
+            while(iterTask.hasNext()){
+                Task task = iterTask.next();
+                taskStr += task.getTitle() + ", ";
             }
-            return temp;
-        }
-        else{
-            return null;
+            if(tasks.size() >= 1)
+                taskStr.substring(0, taskStr.lastIndexOf(",")-1);
+            this.tasks = taskStr;
         }
     }
+   
     public Date getDateOfReport() {
         return dateOfReport;
     }
@@ -113,6 +90,41 @@ public class ReportDTO {
     public void setWorkingHours(Integer workingHours) {
         this.workingHours = workingHours;
     }
+
+    @Override
+    public String toString() {
+        return "ReportDTO{" + "id=" + id + ", dateOfReport=" + dateOfReport + ", workingHours=" + workingHours + ", doneHours=" + doneHours + ", user=" + user + ", tasks=" + tasks + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ReportDTO other = (ReportDTO) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 61 * hash + (this.dateOfReport != null ? this.dateOfReport.hashCode() : 0);
+        hash = 61 * hash + (this.workingHours != null ? this.workingHours.hashCode() : 0);
+        hash = 61 * hash + (this.doneHours != null ? this.doneHours.hashCode() : 0);
+        hash = 61 * hash + (this.user != null ? this.user.hashCode() : 0);
+        hash = 61 * hash + (this.tasks != null ? this.tasks.hashCode() : 0);
+        return hash;
+    }
+    
     
     
 }

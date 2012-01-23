@@ -1,22 +1,48 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <wicket:head>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/master.css"/>
 </wicket:head>
-    <title>Wicket Examples - Authorization Roles</title>
+    <title>Wicket</title>
 </head>
 <body>
-    <div id="menu">
-        <span wicket:id="adminMenu">
+    <div id="header">
+		
+		<h1><a href="#" title="Go Home">Celestial <span>A free task manager</span></a></h1>
+		
+		<div class="tree"></div>
+	</div><!--/header-->
+	
+	<div id="container">
+		<div id="content">
+                    <wicket:child/>
+                        
+                </div><!--/content-->
+		
+		<div id="sidebar">
+			<h3><wicket:message key="menu"></wicket:message></h3>
+			<ul class="links">
+				<span wicket:id="adminMenu">
             
-        </span>
-        <span wicket:id="userMenu">
+                                </span>
+                                <span wicket:id="userMenu">
             
-        </span>
-        <span wicket:id="allMenu">
+                                </span>
+                                <span wicket:id="allMenu">
             
-        </span>
-    </div>
-        <wicket:child/>
+                                </span>
+			</ul>
+			
+		</div><!--/sidenar-->
+	</div><!--/container-->
+	<div id="footer">
+		<div id="footer-content">
+			<a wicket:id = "russian">Русский</a>
+                        <a wicket:id = "english">English</a>
+		</div><!--/footer-content-->
+	</div><!--/footer-->
+
+        
 </body>
 </html>

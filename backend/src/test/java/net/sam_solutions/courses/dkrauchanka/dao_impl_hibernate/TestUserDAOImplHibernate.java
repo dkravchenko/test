@@ -1,5 +1,8 @@
 package net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 import net.sam_solutions.courses.dkrauchanka.utils.HSQLDBUtil;
 import org.junit.BeforeClass;
 import net.sam_solutions.courses.dkrauchanka.utils.Password;
@@ -15,7 +18,9 @@ public class TestUserDAOImplHibernate {
     
     @BeforeClass
     public static void before(){
-        HSQLDBUtil.getInstance().prepare();
+        BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+        HSQLDBUtil util = (HSQLDBUtil) factory.getBean("HSQLDBUtil");
+        util.prepare();
     }
     
     @Test

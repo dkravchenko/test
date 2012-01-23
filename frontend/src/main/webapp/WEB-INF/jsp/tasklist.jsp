@@ -52,7 +52,7 @@
                 <%= taskDto.getStatus() %>
             </td>
             <td>
-                <%= taskDto.getUserDto().getFirstName()+" "+taskDto.getUserDto().getLastName() %>
+                <%= taskDto.getUser() %>
             </td>
         </tr>
         <%

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +12,18 @@ import net.sam_solutions.courses.dkrauchanka.domain.Report;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.utils.ConnectionPoolUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 public class ReportDAOImpl implements ReportDAO{
     public static final Logger log = Logger.getLogger(ReportDAOImpl.class);
+    private BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+    private ConnectionPoolUtil util = (ConnectionPoolUtil) factory.getBean("ConnectionPoolUtil");
     
     @Override
     public void addReport(Report report) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         PreparedStatement stmt = null;
         String sql = "SELECT * FROM reports WHERE reports_id_reports=?;";
         try{
@@ -74,7 +78,7 @@ public class ReportDAOImpl implements ReportDAO{
     @Override
     public List<Report> listReport(int page, int count) {
         List<Report> temp = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM reports;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -107,7 +111,7 @@ public class ReportDAOImpl implements ReportDAO{
 
     @Override
     public void removeReport(Report report) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "DELETE FROM reports WHERE reports_id_reports=?;";
         log.info(sql);
         try{
@@ -131,7 +135,7 @@ public class ReportDAOImpl implements ReportDAO{
     @Override
     public Report getReport(Integer id) {
         Report report = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM reports WHERE reports_id_reports=?;";
         log.info(sql);
         try{

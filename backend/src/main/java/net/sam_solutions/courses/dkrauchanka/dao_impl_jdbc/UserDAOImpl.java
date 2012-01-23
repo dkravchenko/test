@@ -11,13 +11,18 @@ import net.sam_solutions.courses.dkrauchanka.domain.Role;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
 import net.sam_solutions.courses.dkrauchanka.utils.ConnectionPoolUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 
 public class UserDAOImpl implements UserDAO{
     public static final Logger log = Logger.getLogger(UserDAOImpl.class);
+    private BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+    private ConnectionPoolUtil util = (ConnectionPoolUtil) factory.getBean("ConnectionPoolUtil");
     
     @Override
     public void addUser(User user) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM users WHERE users_login=?;";
         log.info(sql);
         try{
@@ -65,7 +70,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public List<User> listUser(int page, int count) {
         List<User> temp = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM users;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -97,7 +102,7 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void removeUser(User user) {
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "DELETE FROM users WHERE users_login=?;";
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -120,7 +125,7 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User getUser(String login) {
         User user = null;
-        Connection conn = ConnectionPoolUtil.getInstance().getConnection();
+        Connection conn = util.getConnection();
         String sql = "SELECT * FROM users WHERE users_login=?;";
         log.info(sql);
         try{

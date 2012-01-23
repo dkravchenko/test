@@ -15,10 +15,9 @@ import org.apache.log4j.Logger;
 
 public class ConnectionPoolUtil {
     public static final Logger log = Logger.getLogger(ConnectionPoolUtil.class);
-    private static ConnectionPoolUtil instance;
     private DataSource dataSource;
     
-    private ConnectionPoolUtil(){
+    public ConnectionPoolUtil(){
         ResourceBundle rs = ResourceBundle.getBundle("jdbc");
         try {
             ObjectPool connectionPool = new GenericObjectPool(null);
@@ -30,13 +29,7 @@ public class ConnectionPoolUtil {
              log.fatal("Connot establish db connection");	        
          }
     }
-    
-    public static synchronized ConnectionPoolUtil getInstance(){
-        if(instance == null)
-            instance = new ConnectionPoolUtil();
-        return instance;
-    }
-    
+
     public Connection getConnection(){
         Connection conn = null;
         try{

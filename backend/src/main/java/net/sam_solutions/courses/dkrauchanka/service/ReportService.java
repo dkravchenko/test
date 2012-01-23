@@ -10,6 +10,7 @@ import net.sam_solutions.courses.dkrauchanka.dao_impl_hibernate.UserDAOImpl;
 import net.sam_solutions.courses.dkrauchanka.domain.Report;
 import net.sam_solutions.courses.dkrauchanka.domain.Task;
 import net.sam_solutions.courses.dkrauchanka.domain.User;
+import net.sam_solutions.courses.dkrauchanka.dto.DTOConverter;
 import net.sam_solutions.courses.dkrauchanka.dto.ReportDTO;
 
 public class ReportService {
@@ -17,40 +18,25 @@ public class ReportService {
     
     public List<ReportDTO> listReport(int page, int count){
         List<Report> list = reportDao.listReport(page, count);
-        return ReportDTO.reportListToReportDTOList(list);
+        return DTOConverter.reportListToReportDTOList(list);
     }
     
     public List<ReportDTO> listReportByUser(int page, int count, String login){
         List<Report> list = reportDao.listReportByUser(page, count, login);
-        return ReportDTO.reportListToReportDTOList(list);
-    }
-    
-    public List<ReportDTO> listReportByDate(int page, int count, String date){
-        List<Report> list = reportDao.listReportByUser(page, count, date);
-        return ReportDTO.reportListToReportDTOList(list);
-    }
-    
-    public List<ReportDTO> listReportByTask(int page, int count, Integer id){
-        TaskDAOImpl taskDao = new TaskDAOImpl();
-        Task task = taskDao.getTask(id);
-        List<Report> reports = task.getReports();
-        return ReportDTO.reportListToReportDTOList(reports);
+        return DTOConverter.reportListToReportDTOList(list);
     }
     
     public Integer getPagesCount(int onPage){
-        ReportDAOImpl reportDao = new ReportDAOImpl();
         Long count = reportDao.countReport();
         return (int)Math.ceil((double)count/onPage);
     }
     
     public Integer getPagesCountByUser(int onPage, String login){
-        ReportDAOImpl reportDao = new ReportDAOImpl();
         Long count = reportDao.countReportByUser(login);
         return (int)Math.ceil((double)count/onPage);
     }
     
     public ReportDTO getReport(Integer id){
-        ReportDAOImpl reportDao = new ReportDAOImpl();
         return new ReportDTO(reportDao.getReport(id));
     }
     
@@ -58,7 +44,6 @@ public class ReportService {
         if(hidden.size() == count.size()){
             TaskDAOImpl taskdao = new TaskDAOImpl();
             TaskService taskService = new TaskService();
-            ReportDAOImpl reportDao = new ReportDAOImpl();
             Integer totalHours = 0;
             List<Task> listTask = new ArrayList<Task>();
             Iterator<String> iterHidden = hidden.iterator();

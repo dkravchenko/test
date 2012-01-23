@@ -1,10 +1,6 @@
 package net.sam_solutions.courses.dkrauchanka.dto;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import net.sam_solutions.courses.dkrauchanka.domain.Task;
-import net.sam_solutions.courses.dkrauchanka.domain.User;
 
 public class TaskDTO {
     private Integer id;
@@ -12,7 +8,8 @@ public class TaskDTO {
     private String text;
     private Integer hoursToDo;
     private String status;
-    private UserDTO userDto; 
+    private String user; 
+    private String login;
     
     public TaskDTO(){
         
@@ -24,31 +21,27 @@ public class TaskDTO {
         this.text = task.getText();
         this.hoursToDo = task.getHoursToDo();
         this.status = task.getStatus();
-        this.userDto = new UserDTO(task.getUser());
+        this.user = task.getUser().getFirstName()+" "+task.getUser().getLastName();
+        this.login = task.getUser().getLogin();
     }
 
-    public TaskDTO(Integer id, String title, String text, Integer hoursToDo, String status,User user) {
+    public TaskDTO(Integer id, String title, String text, Integer hoursToDo, String status,String user) {
         this.id = id;
         this.title = title;
         this.text = text;
         this.hoursToDo = hoursToDo;
         this.status = status;
-        this.userDto = new UserDTO(user);
+        this.user = user;
     }
     
-    public static List<TaskDTO> taskToTaskDTOList(List<Task> list){
-        try{
-            List<TaskDTO> temp = new ArrayList<TaskDTO>();
-            Iterator<Task> iter = list.iterator();
-            while(iter.hasNext()){
-                TaskDTO taskDto = new TaskDTO(iter.next());
-                temp.add(taskDto);
-            }
-            return temp;
-        }
-        catch(NullPointerException e){
-            return null;
-        }
+    public TaskDTO(Integer id, String title, String text, Integer hoursToDo, String status,String user, String login) {
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.hoursToDo = hoursToDo;
+        this.status = status;
+        this.user = user;
+        this.login = login;
     }
 
     public Integer getHoursToDo() {
@@ -91,12 +84,20 @@ public class TaskDTO {
         this.title = title;
     }
 
-    public UserDTO getUserDto() {
-        return userDto;
+    public String getUser() {
+        return user;
     }
 
-    public void setUserDto(UserDTO userDto) {
-        this.userDto = userDto;
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     

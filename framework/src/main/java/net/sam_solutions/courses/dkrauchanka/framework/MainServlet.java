@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,10 +11,14 @@ import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.xml.sax.SAXException;
 
 public class MainServlet extends HttpServlet {     
      private static final Logger log = Logger.getLogger(MainServlet.class);
+     private BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring-framework.xml"));
     
      private String getActionName(HttpServletRequest request) {
           String path = request.getServletPath();
@@ -40,28 +43,14 @@ public class MainServlet extends HttpServlet {
              user = new SessionUser(null,null,"guest");
          }
     	 try{
-             if(!SecurityManager.getInstance(getServletContext().getRealPath("WEB-INF/classes/security.xml")).isAccessable(requestMap, user.getRole())){
+             SecurityManager securityManager = (SecurityManager) factory.getBean("securityManager");
+             if(!securityManager.isAccessable(requestMap, user.getRole())){
                  requestMap = "index";
              }
              log.info(requestMap);
-             action = (Action)Class.forName(ControllerManager.getInstance(getServletContext().getRealPath("WEB-INF/classes/controllers.xml")).getController(requestMap)).newInstance();
-    	 }
-    	 catch (FileNotFoundException e){
-            action = new ErrorController(500,"Internal server error",e.getStackTrace());
-            log.info("File not found");
-         } 
-    	 catch (ParserConfigurationException e){
-        	 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.info("Bad parser configuration");
-         } 
-    	 catch (SAXException e){
-        	 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.info("Error while parsing xml");
-         } 
-    	 catch (IOException e){
-        	 action = new ErrorController(500,"Internal server error",e.getStackTrace());
-                 log.info("Error reading file");
-         }
+             ControllerManager controllerManager = (ControllerManager) factory.getBean("controllerManager");
+             action = (Action)Class.forName(/*ControllerManager.getInstance(getServletContext().getRealPath("WEB-INF/classes/controllers.xml")).getController(requestMap)*/controllerManager.getController(requestMap)).newInstance();
+    	 } 
     	 catch (ClassCastException e){
     		 action = new ErrorController(500,"Internal server error",e.getStackTrace());
                  log.info("Error while casting class");

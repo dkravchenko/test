@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import net.sam_solutions.courses.dkrauchanka.SelectOption;
+import net.sam_solutions.courses.dkrauchanka.constants.Constants;
 import net.sam_solutions.courses.dkrauchanka.dto.TaskDTO;
-import net.sam_solutions.courses.dkrauchanka.dto.TaskDTOWicket;
 import net.sam_solutions.courses.dkrauchanka.dto.UserDTO;
+import net.sam_solutions.courses.dkrauchanka.panels.TablePanel;
 import net.sam_solutions.courses.dkrauchanka.providers.TaskByUserDataProvider;
 import net.sam_solutions.courses.dkrauchanka.providers.TaskDataProvider;
 import net.sam_solutions.courses.dkrauchanka.service.TaskService;
@@ -41,37 +42,22 @@ import org.apache.wicket.util.time.Duration;
 @AuthorizeInstantiation("admin")
 public class TaskRule extends BasePage{
     final FeedbackPanel feedBack = new FeedbackPanel("feedback");
-    private AjaxFallbackDefaultDataTable<TaskDTOWicket> table;
-    private List<IColumn<TaskDTOWicket>> columns;
-    private Form<TaskDTOWicket> form;
+    private AjaxFallbackDefaultDataTable<TaskDTO> table;
+    private List<IColumn<TaskDTO>> columns;
+    private Form<TaskDTO> form;
     private AjaxButton updateButton;
     private AjaxButton addButton;
-    private TaskDTOWicket task = new TaskDTOWicket();
-    private TaskDTOWicket toDelete;
-    private TaskDTOWicket toUpdate;
+    private TaskDTO task = new TaskDTO();
+    private TaskDTO toDelete;
+    private TaskDTO toUpdate;
     private TaskService taskService = new TaskService();
     private UserService userService = new UserService();
-    class TablePanel extends Panel{
-        private AjaxFallbackDefaultDataTable<TaskDTOWicket> table;
-        
-        TablePanel(String name, AjaxFallbackDefaultDataTable<TaskDTOWicket> table){
-            super(name);
-            this.table = table;
-            this.add(table);
-        }
-        
-        public void refreshTable(AjaxFallbackDefaultDataTable<TaskDTOWicket> table){
-            this.remove(this.table);
-            this.table = table;
-            this.add(table);
-        }
-    }
     class DeletePanel extends Panel{
-        public DeletePanel(String id, IModel<TaskDTOWicket> model){
+        public DeletePanel(String id, IModel<TaskDTO> model){
             super(id, model);
             add(new AjaxLink("delete"){
                 public void onClick(AjaxRequestTarget target){
-                    toDelete = (TaskDTOWicket)getParent().getDefaultModelObject();
+                    toDelete = (TaskDTO)getParent().getDefaultModelObject();
                     taskService.removeTask(toDelete.getId());
                     target.add(table);
                 }
@@ -80,11 +66,11 @@ public class TaskRule extends BasePage{
         
     }
     class UpdatePanel extends Panel{
-        public UpdatePanel(String id, IModel<TaskDTOWicket> model){
+        public UpdatePanel(String id, IModel<TaskDTO> model){
             super(id, model);
             add(new AjaxLink("update"){
                 public void onClick(AjaxRequestTarget target){
-                    toUpdate = (TaskDTOWicket)getParent().getDefaultModelObject();
+                    toUpdate = (TaskDTO)getParent().getDefaultModelObject();
                     task.setTitle(toUpdate.getTitle());
                     task.setText(toUpdate.getText());
                     task.setHoursToDo(toUpdate.getHoursToDo());
@@ -105,7 +91,10 @@ public class TaskRule extends BasePage{
         }
         protected void onSubmit(AjaxRequestTarget target, Form<?> form){
                 target.add(feedBack);
-                taskService.addNewTask(toUpdate.getId(), task.getTitle(), task.getText(), task.getHoursToDo(), selectedStatus.getKey(), selectedUser.getKey());
+                if(toUpdate != null)
+                    taskService.addNewTask(toUpdate.getId(), task.getTitle(), task.getText(), task.getHoursToDo(), selectedStatus.getKey(), selectedUser.getKey());
+                else
+                    taskService.addNewTask(null, task.getTitle(), task.getText(), task.getHoursToDo(), selectedStatus.getKey(), selectedUser.getKey());
                 task.setTitle("");
                 task.setText("");
                 task.setHoursToDo(null);
@@ -121,38 +110,38 @@ public class TaskRule extends BasePage{
                 target.add(feedBack);
         }
     }
-    private TablePanel panel;
+    private TablePanel<TaskDTO> panel;
     public SelectOption selected = new SelectOption("0","...");
     public SelectOption selectedStatus = new SelectOption("to do","to do");
     public SelectOption selectedUser = new SelectOption("0","...");
     
     public TaskRule(){
-        columns = new ArrayList<IColumn<TaskDTOWicket>>();
+        columns = new ArrayList<IColumn<TaskDTO>>();
         
-        columns.add(new PropertyColumn<TaskDTOWicket>(new ResourceModel("label.title"),"title"));
-        columns.add(new PropertyColumn<TaskDTOWicket>(new ResourceModel("label.text"),"text"));
-        columns.add(new PropertyColumn<TaskDTOWicket>(new ResourceModel("label.hours"),"hoursToDo"));
-        columns.add(new PropertyColumn<TaskDTOWicket>(new ResourceModel("label.status"),"status"));
-        columns.add(new PropertyColumn<TaskDTOWicket>(new ResourceModel("label.user"),"user"));
-        columns.add(new AbstractColumn<TaskDTOWicket>(new ResourceModel("link.delete")){
-            public void populateItem(Item<ICellPopulator<TaskDTOWicket>> cellItem, String componentId, IModel<TaskDTOWicket> model){
+        columns.add(new PropertyColumn<TaskDTO>(new ResourceModel("label.title"),"title"));
+        columns.add(new PropertyColumn<TaskDTO>(new ResourceModel("label.text"),"text"));
+        columns.add(new PropertyColumn<TaskDTO>(new ResourceModel("label.hours"),"hoursToDo"));
+        columns.add(new PropertyColumn<TaskDTO>(new ResourceModel("label.status"),"status"));
+        columns.add(new PropertyColumn<TaskDTO>(new ResourceModel("label.user"),"user"));
+        columns.add(new AbstractColumn<TaskDTO>(new ResourceModel("link.delete")){
+            public void populateItem(Item<ICellPopulator<TaskDTO>> cellItem, String componentId, IModel<TaskDTO> model){
                 cellItem.add(new DeletePanel(componentId, model));
             }
         });
-        columns.add(new AbstractColumn<TaskDTOWicket>(new ResourceModel("link.update")){
-            public void populateItem(Item<ICellPopulator<TaskDTOWicket>> cellItem, String componentId, IModel<TaskDTOWicket> model){
+        columns.add(new AbstractColumn<TaskDTO>(new ResourceModel("link.update")){
+            public void populateItem(Item<ICellPopulator<TaskDTO>> cellItem, String componentId, IModel<TaskDTO> model){
                 cellItem.add(new UpdatePanel(componentId, model));
             }
         });
         
-        table = new AjaxFallbackDefaultDataTable<TaskDTOWicket>("table", columns, new TaskDataProvider(),10);
+        table = new AjaxFallbackDefaultDataTable<TaskDTO>("table", columns, new TaskDataProvider(),Constants.ROWS_ON_PAGE);
         panel = new TablePanel("tablePanel",table);
         panel.setOutputMarkupId(true);
         add(panel);
         add(feedBack);
         feedBack.setOutputMarkupId(true);
         
-        form = new Form<TaskDTOWicket>("addTaskForm", new CompoundPropertyModel<TaskDTOWicket>(task));
+        form = new Form<TaskDTO>("addTaskForm", new CompoundPropertyModel<TaskDTO>(task));
         add(form);
         form.setOutputMarkupId(true);
         
@@ -179,7 +168,6 @@ public class TaskRule extends BasePage{
         DropDownChoice dropDown = new DropDownChoice("status",new PropertyModel(this,"selectedStatus"), selStatus,choiceRenderer);
         form.add(dropDown);
         
-        UserService userService = new UserService();
         List<UserDTO> list = userService.listUsers(1, userService.getPagesCount(1));
         List<SelectOption> selList = new ArrayList<SelectOption>();
         selList.add(new SelectOption("0","..."));
@@ -208,10 +196,10 @@ public class TaskRule extends BasePage{
         dropDown.add(new AjaxFormComponentUpdatingBehavior("onchange"){
             protected void onUpdate(AjaxRequestTarget target){
                 if(selected.equals(new SelectOption("0","..."))){
-                    table = new AjaxFallbackDefaultDataTable<TaskDTOWicket>("table", columns, new TaskDataProvider(),10);
+                    table = new AjaxFallbackDefaultDataTable<TaskDTO>("table", columns, new TaskDataProvider(),Constants.ROWS_ON_PAGE);
                 }
                 else{
-                    table = new AjaxFallbackDefaultDataTable<TaskDTOWicket>("table", columns, new TaskByUserDataProvider(selected.getKey()),10);
+                    table = new AjaxFallbackDefaultDataTable<TaskDTO>("table", columns, new TaskByUserDataProvider(selected.getKey()),Constants.ROWS_ON_PAGE);
                 }
                 panel.refreshTable(table);
                 target.add(panel);

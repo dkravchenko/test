@@ -1,3 +1,95 @@
 <wicket:extend>
-    TaskSelf! 
+    <h3><wicket:message key="header"></wicket:message></h3><br/>
+    <span wicket:id="tablePanel">
+            
+    </span><br/>
+    <div id="add">
+        <form wicket:id="addTaskForm">
+            <h3><wicket:message key="adding"></wicket:message></h3><br/>
+        <table class="form_table">
+        <tr>
+            <td>
+                <label wicket:id="title-label">12</label>
+            </td>
+            <td>
+                <input wicket:id="title" name="title" id="title" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label wicket:id="text-label">13</label>
+            </td>
+            <td>
+                <input wicket:id="text" name="text" id="text" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label wicket:id="hoursToDo-label">14</label>
+            </td>
+            <td>
+                <input wicket:id="hoursToDo" name="hoursToDo" id="hoursToDo" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <wicket:message key="label.status"></wicket:message>
+            </td>
+            <td>
+                <select wicket:id="status" class="select"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+                <input type="submit" wicket:id="ajax-button" value="<wicket:message key='button.add'></wicket:message>"/>
+            </td>
+        </tr>
+    </table>
+    </form>
+    
+    
+    <span wicket:id="feedback"/>
+    </div>
+<div id="filter">
+        <h3><wicket:message key="filter.header"></wicket:message></h3><br/>
+    <form wicket:id="changeStatusForm">
+        <table class="form_table">
+            <tr>
+                <td>
+                    <wicket:message key="label.title"></wicket:message>
+                </td>
+                <td>
+                    <label wicket:id="taskTitle">14</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <wicket:message key="label.text"></wicket:message>
+                </td>
+                <td>
+                    <label wicket:id="taskText">14</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <wicket:message key="label.hours"></wicket:message>
+                </td>
+                <td>
+                    <label wicket:id="taskHours">14</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <wicket:message key="label.status"></wicket:message>
+                </td>
+                <td>
+                    <select name="taskStatus" wicket:id="taskStatus"></select>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
 </wicket:extend>

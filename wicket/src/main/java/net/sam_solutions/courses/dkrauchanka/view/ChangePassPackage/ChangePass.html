@@ -1,0 +1,42 @@
+<wicket:extend>
+    <h3><wicket:message key="header"></wicket:message></h3><br/>
+    <div id="add">
+        <form wicket:id="newPassForm">
+            <table class="form_table">
+        <tr>
+            <td>
+                <label wicket:id="pass-label">12</label>
+            </td>
+            <td>
+                <input wicket:id="pass" name="pass" id="pass" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label wicket:id="newPass-label">13</label>
+            </td>
+            <td>
+                <input wicket:id="newPass" name="newPass" id="newPass" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label wicket:id="confirmPass-label">14</label>
+            </td>
+            <td>
+                <input wicket:id="confirmPass" name="confirmPass" id="confirmPass" type="text"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+                <input type="submit" wicket:id="ajax-button" value="<wicket:message key='button.change'></wicket:message>"/>
+            </td>
+        </tr>
+            </table>
+        </form>
+        <span wicket:id="feedback"/>
+    </div>
+</wicket:extend>

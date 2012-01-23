@@ -1,10 +1,12 @@
 <wicket:extend>
-    <div id="page">
+    <h3><wicket:message key="header"></wicket:message></h3><br/>
     <span wicket:id="tablePanel">
             
-    </span>
+    </span><br/>
+    <div id="add">
         <form wicket:id="addTaskForm">
-        <table>
+            <h3><wicket:message key="adding"></wicket:message></h3><br/>
+        <table class="form_table">
         <tr>
             <td>
                 <label wicket:id="title-label">12</label>
@@ -50,19 +52,20 @@
                 
             </td>
             <td>
-                <input type="submit" wicket:id="ajax-button" value="Add"/>
-                <input type="submit" wicket:id="ajax-update-button" value="Update"/>
+                <input type="submit" wicket:id="ajax-button" value="<wicket:message key='button.add'></wicket:message>"/>
+                <input type="submit" wicket:id="ajax-update-button" value="<wicket:message key='button.update'></wicket:message>"/>
             </td>
         </tr>
     </table>
-    </form><br/>
+    </form>
+    
+    
     <span wicket:id="feedback"/>
-    <br/><br/>
     </div>
-    <div id="filter">
-        <h3><wicket:message key="filter.header"></wicket:message></h3>
+<div id="filter">
+        <h3><wicket:message key="filter.header"></wicket:message></h3><br/>
     <form wicket:id="filterForm">
-        <table id="filterTable">
+        <table class="form_table">
             <tr>
                 <td>
                     <wicket:message key="filter.byuser"></wicket:message>
@@ -73,5 +76,5 @@
             </tr>
         </table>
     </form>
-        </div>
+    </div>
 </wicket:extend>
